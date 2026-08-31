@@ -1,0 +1,9 @@
+{
+  "name": "医械合规评分器",
+  "normalizedName": "medical-device-compliance-grader",
+  "description": "医疗器械合规度量化评分工具——8 大合规维度（注册路径/技术文件/风险管理/临床评价/标签IFU/软件网络安全/上市后监管/质量体系）0-5 分制评分 + 评分锚点 + 一键生成自包含 HTML 评分卡（雷达图 + 明细表 + 改进建议，纯 SVG 无外部依赖）。注册前自评、发补整改效果验证、多产品横向对比都能用，评分维度与锚点附法规依据（ISO 14971、MDR、121 号公告等）。",
+  "author": "注册老炮@MedXpert",
+  "copyright": "MedXpert",
+  "version": "1.0.0",
+  "license": "MIT"
+}

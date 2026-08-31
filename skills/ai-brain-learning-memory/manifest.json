@@ -1,0 +1,9 @@
+{
+  "name": "ai-brain-learning-memory",
+  "normalizedName": "ai-brain-learning-memory",
+  "description": "AI 大脑学习记忆方法论（汇总版），用于回答「怎么让 AI 记住我说过的话」「AI 老忘事怎么办」「AI 记忆会不会被投毒」这类问题。按人脑模型组织：三层记忆架构 + 编码→存储→提取三阶段 + 训战省化学习飞轮 + 复习与遗忘机制 + 人脑学习法原理与 AI 对照 + 记忆安全。其中「记得自己是谁、记得授权与历史承诺」对应三锚核验的记忆锚（Memory Anchor），记忆溯源按证据链审计留痕。含 30 秒上手、触发说明、场景例子与问题速查表，非技术用户也能直接用。触发词：大脑学习记忆、AI 学习记忆、记忆架构、怎么让 AI 记住、AI 老忘事、记忆机制、记忆固化、记忆分层、艾宾浩斯、间隔重复、记忆宫殿、费曼学习法、主动回忆、记忆投毒、记忆安全、情节记忆、语义记忆、brain memory、learning memory、memory architecture。本技能为通用方法论工具，非",
+  "author": "诺学(Didaskalos)@SynomosAI",
+  "copyright": "SynomosAI",
+  "version": "2.4.0",
+  "license": "MIT"
+}

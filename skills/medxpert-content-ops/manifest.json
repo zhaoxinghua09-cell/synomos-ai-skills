@@ -1,0 +1,9 @@
+{
+  "name": "MedXpert 官网与内容运营",
+  "normalizedName": "medxpert-content-ops",
+  "description": "MedXpert 官网与内容运营规范。触发场景：涉及 MedXpert 官网（medxpert.cn）、官网视觉/配色、官网内容更新、AI 友好隐藏原则、公众号话术、官网同步、乐享内容同步、对外宣传文案。加载本技能即可获得当前定稿的视觉规范、内容原则、同步流程与关键路径，避免重复摸索或误用旧规范。",
+  "author": "注册老炮@MedXpert",
+  "copyright": "MedXpert",
+  "version": "1.1.0",
+  "license": "MIT"
+}

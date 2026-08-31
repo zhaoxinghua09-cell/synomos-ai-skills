@@ -1,0 +1,9 @@
+{
+  "name": "医械临床评价专家",
+  "normalizedName": "medical-device-clinical-evaluation",
+  "description": "医疗器械临床评价（Clinical Evaluation）专题技能——中/美/欧三条临床评价路径（免临床目录、同品种/等同性比对、临床试验）判定决策树 + 临床评价报告（CER）撰写框架 + 文献检索与临床数据评估清单。注册/RA/研发岗位做临床评价资料时，从\"走哪条路\"到\"报告怎么写\"一站拿到实操模板与官方依据（免临床目录 2025 版、MDCG 2020-13、510(k) SE）。",
+  "author": "注册老炮@MedXpert",
+  "copyright": "MedXpert",
+  "version": "1.0.0",
+  "license": "MIT"
+}

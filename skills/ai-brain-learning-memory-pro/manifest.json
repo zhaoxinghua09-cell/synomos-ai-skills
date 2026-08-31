@@ -1,0 +1,9 @@
+{
+  "name": "ai-brain-learning-memory-pro",
+  "normalizedName": "ai-brain-learning-memory-pro",
+  "description": "ai-brain-learning-memory 的进阶工程版，面向 AI 开发者 / 认知科学爱好者 / agent 架构师，用于回答「记忆系统怎么落地成代码」「记忆投毒怎么防」「记忆效果怎么量化」这类问题。在基础版之上往工程化推一步：三层记忆的参考实现（Python）、与 agent-memory 工具集成、评测电池 memory_eval_battery.py 的跑法与六维解读、OWASP ASI06 记忆投毒防御的代码落地、复习四节点的自动化 rrule 配置、认知科学证据→工程决策映射。记忆锚（Memory Anchor）取自三锚核验，记忆溯源按证据链审计留痕。建议先读基础版再读本版。触发词：记忆系统实现、memory system design、记忆架构代码、agent-memory 集成、记忆评测电池、记忆投毒防御、ASI06、间隔重复实现、遗忘曲线代码、记忆溯源、refer",
+  "author": "诺学(Didaskalos)@SynomosAI",
+  "copyright": "SynomosAI",
+  "version": "1.0.0",
+  "license": "MIT"
+}

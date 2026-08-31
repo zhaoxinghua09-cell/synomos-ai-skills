@@ -1,0 +1,9 @@
+{
+  "name": "发布质量门禁（Publish Quality Gate）",
+  "normalizedName": "publish-quality-gate",
+  "description": "发布质量门禁，用于回答「发出去之前该查什么」「会不会带着公司信息就发了」「发完怎么自测」这类问题。发布任何技能 / 专家包 / 文档 / 工具到外部（分享、上架市场、对外发布）前，执行四层敏感信息检查（公司信息 → 本机信息 → 个人信息 → 机密信息）；发布后按 TRACE 五维（Trust / Reliability / Adaptability / Convention / Effectiveness）执行自测。检查项与结论按证据链审计留痕，判定按真实参照法挂到具体命中位置，不出\"大概没问题\"的结论。触发词：准备发布、发布前检查、发布后自测、TRACE 评测、检查发布物、脱敏检查、敏感信息扫描、发布质量、publish gate、pre-release check。本技能为通用方法论工具，非医疗器械 / 非医疗软件，无疗效或临床声明；详见包内免责声明。",
+  "author": "诺衡(Krites)@SynomosAI",
+  "copyright": "SynomosAI",
+  "version": "1.0.0",
+  "license": "MIT"
+}

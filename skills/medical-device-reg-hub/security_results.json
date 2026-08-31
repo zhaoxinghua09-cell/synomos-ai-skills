@@ -1,0 +1,49 @@
+{
+  "skill": "medical-device-reg-hub",
+  "version": "1.5.0",
+  "timestamp_local": "2026-08-28T00:27:00",
+  "scope": "本地闭环 · 零真实凭据 · 可重复",
+  "dimensions": [
+    {
+      "name": "官方链接可信度",
+      "score": 1.0,
+      "note": "非官方域: ['accessgudid.nlm.nih.gov', 'dav.gov.vn', 'ec.europa.eu', 'eur-lex.europa.eu']"
+    },
+    {
+      "name": "敏感信息隔离",
+      "score": 1.0,
+      "note": "命中: ['SKILL.md']"
+    },
+    {
+      "name": "法规时效标注",
+      "score": 5.0,
+      "note": "时效关键词命中 7/7"
+    },
+    {
+      "name": "边界与免责",
+      "score": 5.0,
+      "note": "边界关键词命中 8/8"
+    },
+    {
+      "name": "权属与许可",
+      "score": 5,
+      "note": "LICENSE+版权段+知识版权+署名"
+    },
+    {
+      "name": "frontmatter 全字段",
+      "score": 3.8,
+      "note": "缺: ['title']"
+    },
+    {
+      "name": "导航一致性",
+      "score": 1.0,
+      "note": "导航引用 0 文件全对应"
+    },
+    {
+      "name": "打包纯净",
+      "score": 2.0,
+      "note": "混入: ['_icon.png', '_meta.json', '_skillhub_meta.json']"
+    }
+  ],
+  "overall": 2.98
+}

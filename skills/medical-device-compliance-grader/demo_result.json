@@ -1,0 +1,101 @@
+{
+  "product": "示例产品（关节镜用复用外科器械）",
+  "market": "中国 II 类 / 欧盟 MDR IIa / 美国 510(k)",
+  "date": "2026-08-27",
+  "items": [
+    {
+      "key": "D1",
+      "zh": "注册路径与分类",
+      "en": "Regulatory Pathway & Classification",
+      "na": false,
+      "score": 4,
+      "label": "4 · 完整可查证",
+      "color": "#16a085",
+      "note": "分类已按目录确认，路径已定"
+    },
+    {
+      "key": "D2",
+      "zh": "技术文件完整性",
+      "en": "Technical Documentation Completeness",
+      "na": false,
+      "score": 3,
+      "label": "3 · 基本完整",
+      "color": "#27ae60",
+      "note": "STED 骨架已搭，验证章节待补"
+    },
+    {
+      "key": "D3",
+      "zh": "风险管理",
+      "en": "Risk Management",
+      "na": false,
+      "score": 2,
+      "label": "2 · 部分成文",
+      "color": "#f1c40f",
+      "note": "风险管理报告初稿，缺控制措施验证记录"
+    },
+    {
+      "key": "D4",
+      "zh": "临床评价",
+      "en": "Clinical Evaluation",
+      "na": false,
+      "score": 1,
+      "label": "1 · 仅提及",
+      "color": "#e67e22",
+      "note": "尚未启动临床评价路径判定"
+    },
+    {
+      "key": "D5",
+      "zh": "标签与说明书",
+      "en": "Labeling & IFU",
+      "na": false,
+      "score": 3,
+      "label": "3 · 基本完整",
+      "color": "#27ae60",
+      "note": "标签草稿已有，缺 UDI 与符号核验"
+    },
+    {
+      "key": "D6",
+      "zh": "软件与网络安全",
+      "en": "Software & Cybersecurity",
+      "na": true,
+      "score": null,
+      "label": "N/A",
+      "color": "#95a5a6",
+      "note": "纯无源器械，无软件"
+    },
+    {
+      "key": "D7",
+      "zh": "上市后监管",
+      "en": "Post-Market Surveillance",
+      "na": false,
+      "score": 2,
+      "label": "2 · 部分成文",
+      "color": "#f1c40f",
+      "note": "PMS 计划未建，不良事件渠道已接入"
+    },
+    {
+      "key": "D8",
+      "zh": "质量体系",
+      "en": "QMS / GMP",
+      "na": false,
+      "score": 3,
+      "label": "3 · 基本完整",
+      "color": "#27ae60",
+      "note": "ISO 13485 体系运行中，DHF 待完善"
+    }
+  ],
+  "avg": 2.57,
+  "applicable_count": 7,
+  "grade": "C（中）",
+  "grade_desc": "缺项较多，须系统补全后再申报",
+  "advice": [
+    "立即补风险管理报告（ISO 14971 六步流程），与验证/临床文件建立互相引用闭环",
+    "先做临床评价路径判定（免临床/同品种/临床试验），再按官方模板（MDCG 2020-13）撰写 CER",
+    "建立 PMS 计划 + 不良事件监测报告流程，明确各市场（美国/欧盟/中国/日本）报告时限"
+  ],
+  "low_dimensions": [
+    "风险管理",
+    "临床评价",
+    "上市后监管"
+  ]
+}
