@@ -1,0 +1,24 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "find-skills",
+  "version": "1.7.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:28.607755+00:00",
+  "timestamp_local": "2026-08-31T17:28:28.607762",
+  "package_fingerprint_sha256": "088a27eecd0c1b25bf4e2533233d51b1572eb45c791dd07250b327b04655176e",
+  "files": [
+    {
+      "path": "LICENSE",
+      "sha256": "608ef769ecd4d61895be02c77c1d837772b7b3e81b9744a75ef11709e9cdaeef"
+    },
+    {
+      "path": "README.md",
+      "sha256": "12a7857f25aa02e2f05ccef03ef4d71297e423ba047bc9da94f81451866801ad"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "2de5e3bf2a1715a2dfc15cee0dbcfe79ce128abd007c1125f9c98db2e79af923"
+    }
+  ]
+}

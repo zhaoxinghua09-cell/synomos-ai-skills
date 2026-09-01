@@ -1,0 +1,24 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "fingerprint-delivery",
+  "version": "1.0.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:31.672185+00:00",
+  "timestamp_local": "2026-08-31T17:28:31.672191",
+  "package_fingerprint_sha256": "3ea47359756e7df6360274f748bcd52779c33bf2c83591c7c8ac7343f63796cc",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "841a73c80c4e2ccd88d0001336ef64230261c4d8dc738fba074f372d7a19327f"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "038237593f60c2adbb64b2088da0eeec1ca20ad5335dc63e436be4d824956af1"
+    },
+    {
+      "path": "scripts/fingerprint_delivery.py",
+      "sha256": "f1b4f34c068dcf5f5d154c604fa5dca0e5ea820b339a0185dadc149af5b0042a"
+    }
+  ]
+}

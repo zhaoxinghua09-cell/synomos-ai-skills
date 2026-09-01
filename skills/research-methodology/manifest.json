@@ -1,0 +1,20 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "research-methodology",
+  "version": "1.0.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:34.121615+00:00",
+  "timestamp_local": "2026-08-31T17:28:34.121623",
+  "package_fingerprint_sha256": "3e5a3724f33fada7d4c2d99305143a2e4e7105478204d82e5610bfd91b94a85d",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "841a73c80c4e2ccd88d0001336ef64230261c4d8dc738fba074f372d7a19327f"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e87a5ddb1adb7f2bbb6a5e4a70f7caa7a509ad2f276928754e2b505f7ea311d0"
+    }
+  ]
+}

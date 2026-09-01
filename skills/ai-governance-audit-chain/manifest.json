@@ -1,0 +1,16 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "ai-governance-audit-chain",
+  "version": "1.0.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:30.820396+00:00",
+  "timestamp_local": "2026-08-31T17:28:30.820403",
+  "package_fingerprint_sha256": "1e46aea8d44503c2e434a6bd2441a31a8a79c23595e98bf1cc33bb2dfa082169",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "fa18113516ef25fc8eeb196bf203248dae7acdd5efeb3d30566992d3e1b29565"
+    }
+  ]
+}

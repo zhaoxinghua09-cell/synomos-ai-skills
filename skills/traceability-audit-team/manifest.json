@@ -1,0 +1,44 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "traceability-audit-team",
+  "version": "1.0.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:35.517403+00:00",
+  "timestamp_local": "2026-08-31T17:28:35.517412",
+  "package_fingerprint_sha256": "c57e25a81745913b6a908bbf1ba3625549f3d6a61ec7a3729e519d771ce9ef3f",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "e8a66e30b55e997de5fca2cb78bbf2bdabd1a50bc739145dcac48e08b748843d"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "074d64d43f008a8a442a4b9c7b3c34c88d9fae7940969c362077fe4723a1c4ea"
+    },
+    {
+      "path": "references/audit-report-template.md",
+      "sha256": "ca2bfae5a6f226fcc874223c9360c7ad3c6048093b29d0d66dbb5cbbd38ed7bb"
+    },
+    {
+      "path": "references/evidence-chain-checklist.md",
+      "sha256": "f34102df12ca25782e06b1b223e249711129c6956f513cc5c5fa27fdcfd9904d"
+    },
+    {
+      "path": "references/standards-map.md",
+      "sha256": "0dcfb591ea728ff295f594ffedfef1268c32f10899f2e73ce7ee4f84eb0491e2"
+    },
+    {
+      "path": "security-radar.svg",
+      "sha256": "49140f1a76423b840043e9cb5630d5b42073c30c3cf8847fb3ad736f9d072244"
+    },
+    {
+      "path": "security_results.json",
+      "sha256": "5e5ec9f8db6d899bbfc98ce5000feb2546b83afdb49aabe1faa8754acf9bfc4b"
+    },
+    {
+      "path": "安全审计报告.md",
+      "sha256": "ac00dd328349c4fc8672f30caccf3b5eba345c1a6dfbde35e83eb83c88070087"
+    }
+  ]
+}

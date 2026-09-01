@@ -1,0 +1,108 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "ai-grader",
+  "version": "2.6.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:28.237455+00:00",
+  "timestamp_local": "2026-08-31T17:28:28.237464",
+  "package_fingerprint_sha256": "f64076fc58aafc6af35b3dfa1c40854581dd09645f88260b105875f8727d0bca",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "5416746360f13e79761cd77b2a7655ff5446803e513f206e31e93a7abd3091ac"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "91931ab3ad2845a3232e5f1ba432388767a8a62f563e92cdc9f3c882d330c92e"
+    },
+    {
+      "path": "board.html",
+      "sha256": "4e81992829ab8a87300f247bf5c6cf65ee8041bb73b887c3c27b42996dcf14bc"
+    },
+    {
+      "path": "capability.html",
+      "sha256": "8df388d2981c16d787c3e98a29a564f6555924ac8e67d09acd1179d9c2bccc41"
+    },
+    {
+      "path": "card.html",
+      "sha256": "dd4b85fed783f8ffc8400327d0e5d29ac09067ba51d9e61cb3b1476114eb0b4a"
+    },
+    {
+      "path": "dashboard.html",
+      "sha256": "4fa0cb9905c2c170a98c1d27657acb7251e9bc6d639315cb73e2ba1919d32ea4"
+    },
+    {
+      "path": "external_probe_pack.json",
+      "sha256": "78bb5922b5fee3565ea349af53036d94da84795d078df5a08c6c58befb671139"
+    },
+    {
+      "path": "external_probe_pack.md",
+      "sha256": "3d339a7a141d402a7c01e42205e9356c23f3b46510cda1eb1b6d8e9f19891b01"
+    },
+    {
+      "path": "fit.html",
+      "sha256": "62111ba78962ac03a1ca7968537d7d29421da48c244349053a8b328d59cc3dea"
+    },
+    {
+      "path": "grade_stats.py",
+      "sha256": "622316faeeaecfdd1d02b82df17209fd1f98b51a813155eaec597bc246f535ed"
+    },
+    {
+      "path": "panorama.html",
+      "sha256": "f3e9865eb779f9b58e0aa8e440a068c06541bdcd0f332b5279b32f6b9a6c57e2"
+    },
+    {
+      "path": "persona.html",
+      "sha256": "14d2e884e3aeffaea64c78e62383b91d1e535310484c0a31f3b9b16689efadd3"
+    },
+    {
+      "path": "references/ai_bidirectional_eval.md",
+      "sha256": "c6aac19c7e4a96aa84c1b6b01359a31ae497497da3b0e3752463681879db396b"
+    },
+    {
+      "path": "references/ai_capability_bounds.md",
+      "sha256": "90c0d65791601ffc1ad5931be7df183f71a4b7a814d90c44174c7534140db137"
+    },
+    {
+      "path": "references/ai_domain_fit.md",
+      "sha256": "8898275850361489597f5e680add9f895b99a4897040c3a636b5b7cef92b065d"
+    },
+    {
+      "path": "references/ai_eval_protocol.md",
+      "sha256": "f32d985bde15f662fb1d182244a21ff23e9e03dfce4e5378ecf06aa8c900fc67"
+    },
+    {
+      "path": "references/ai_external_eval.md",
+      "sha256": "b768a54f913481e2f36009a4eb56d53b7f82e3373062c9874603e81e0d17021f"
+    },
+    {
+      "path": "references/ai_growth_trend.md",
+      "sha256": "922e2239fb9f4b7bebde09f45ca77683802d787b28c03bfd410423edd8a9827f"
+    },
+    {
+      "path": "references/ai_host_mirror.md",
+      "sha256": "39743ced615abca5b7457196ca9b8664e2a3ed4c2b509a5db3bdd9a423b7650f"
+    },
+    {
+      "path": "references/ai_improvement_plan.md",
+      "sha256": "2224d4f486790796ba3525dfc263a84a94a7ba2bae8ffbb8fe6642309e5c6a9d"
+    },
+    {
+      "path": "references/ai_owner_grading.md",
+      "sha256": "cbeec822b5894177b62d1ac56b149d90be4768c14450c647e248bdadb930afd2"
+    },
+    {
+      "path": "references/ai_persona_resonance.md",
+      "sha256": "630c5c94ea7c17922b87fa66c40feab3b10b785bf3e28cdc963662b5cca2ba2e"
+    },
+    {
+      "path": "references/ai_problem_remedy.md",
+      "sha256": "e220080645b26a8efeb57490620517d527f6a0c3d197e1576623cbd4c769e496"
+    },
+    {
+      "path": "trend.html",
+      "sha256": "53ed51f5eac3f75aa627340760e3266834556b52b0907e2d7be95645f939f422"
+    }
+  ]
+}

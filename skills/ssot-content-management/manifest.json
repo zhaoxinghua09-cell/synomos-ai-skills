@@ -1,0 +1,20 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "ssot-content-management",
+  "version": "1.0.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:28.939793+00:00",
+  "timestamp_local": "2026-08-31T17:28:28.939801",
+  "package_fingerprint_sha256": "92c8e7e9ad279d2d0076e8391b6f59e514d53e76186abedfae6723dfb7cb0b54",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "841a73c80c4e2ccd88d0001336ef64230261c4d8dc738fba074f372d7a19327f"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "99dc4234b093735968cfd2e5d194904e5d4692362e618b787eb378f1aaf1d400"
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "a3-law-operational",
+  "version": "1.0.0",
+  "author": "注册老炮@MedXpert",
+  "year": "2026",
+  "timestamp_utc": "2026-08-31T09:28:30.047552+00:00",
+  "timestamp_local": "2026-08-31T17:28:30.047559",
+  "package_fingerprint_sha256": "275a8ae5455b38e195d3b3ab5590233416185946d9f659a9736ee2a9ff258696",
+  "files": [
+    {
+      "path": "SKILL.md",
+      "sha256": "0ca786c407d91aa2b7a30a32e5022e6f0ddb21446c1e4f481b9a8bc774874371"
+    }
+  ]
+}
