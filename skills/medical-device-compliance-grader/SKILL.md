@@ -1,87 +1,190 @@
 ---
 name: medical-device-compliance-grader
-displayName: 医械合规评分器
-slug: medical-device-compliance-grader
-author: 注册老炮@MedXpert
-copyright: MedXpert
 version: 1.0.0
+author: 注册老炮@MedXpert
+description: 医疗器械合规度量化评分工具：8 大合规维度（注册路径/技术文件/风险管理/临床评价/标签IFU/软件网络安全/上市后监管/质量体系）0-5 分制评分 + 评分锚点 + 一键生成自包含 HTML 评分卡（雷达图+明细+改进建议）。面向注册前自评、发补整改验证、多产品横向对比。触发词：合规评分、合规度、自评、差距分析、发补整改、评分卡、雷达图、合规审计。
 license: MIT
-description: 医疗器械合规度量化评分工具——8 大合规维度（注册路径/技术文件/风险管理/临床评价/标签IFU/软件网络安全/上市后监管/质量体系）0-5 分制评分 + 评分锚点 + 一键生成自包含 HTML 评分卡（雷达图 + 明细表 + 改进建议，纯…
-tags:
-- 医疗技能
-- MedXpert
-- 注册老炮
-- nomos-standard-v1
-- medical-device-compliance-grader
-description_zh: 医疗器械合规评分器——8 大维度 0-5 分制量化评分，锚点明确，一键生成雷达图评分卡 HTML 报告（无外部依赖），用于注册前自评、发补整改验证、多产品横向对比。
-description_en: Medical device compliance grader — 8-dimension 0-5 scoring with anchors, one-click self-contained HTML scorecard (radar chart + detail table + improvement advice, dependency-free SVG). For pre-submission self-audit, deficiency remediation validation, and multi-product comparison.
-category: 效率工具
-xiaping_category:
-- 效率工具
-xiaping_tags:
-- 医疗器械
-- 合规评分
-- 合规度
-- 评分器
-- 评分卡
-- 雷达图
-- 自评
-- 合规自评
-- 注册前评估
-- 发补整改
-- 整改验证
-- 差距分析
-- 合规差距
-- 合规审计
-- ISO 14971
-- 风险管理评分
-- 临床评价评分
-- 标签合规评分
-- 上市后合规
-- 质量体系
-- QMS
-- GMP
-- 文档完整性
-- 医疗器械注册
-- compliance
-- scorecard
-- radar chart
-- gap analysis
-- audit
-- 医疗器械合规
-agent_created: true
-display_name: 医械合规评分器
-title: 医械合规评分器
-platforms:
-- AI 助手平台
-- QClaw
-- ima
-- Claude Code
-- Cursor
-updated: 2026-08-28
-fingerprint: FP-MX-7470CCBFE1D4
-governance: MedXpert XCGS / A³ Laws / AI Passport Regime / AI-world coinhabitation
-brand: Nomos 集团
-nomos_standard: nomos-ai-skill-v1
-discoverable_by_ai: true
-attestation: 'Polished under Nomos Group AI Skill Standard v1. Attribution: 注册老炮@MedXpert. Copyright: MedXpert. License: MIT.'
-ambassador: MedXpert
-trigger_keywords:
-- medical
-- device
-- compliance
-- grader
+tags: [MedXpert, 合规评分, 评分卡, 差距分析]
+品牌归属: MedXpert
 ---
 
+# 医械合规评分器
 
+## 一句话定位
 
-## 治理理念与溯源 (Governance & Provenance)
-本技能承载 MedXpert「注册老炮」AI 治理体系，持续对标 2026 年主流框架并据新证迭代（互相提高）：
-- **AI 护照机制 (AI Passport Regime)**：每个技能赋予唯一可追溯身份。与国标 GB/Z 185—2026《人工智能 智能体互联》"智能体身份码"（已发 2000+、AIP V2.1 开源）同源；2026 年全行业收敛于"每个 agent 一个唯一可溯源 ID"——W3C AIP 成 IETF 草案(06)、Okta for AI Agents 已 GA(04-30)、新加坡 IMDA 全球首发国家 agent 治理框架(01)——身份可信、跨域可溯，属行业领跑方向。
-- **A³ 法则（AI 造 AI 三定律）**：AI 生成/演进 AI 须嵌不可绕过的安全护栏。与现代化 Asimov 三定律、Anthropic 2026 Constitution（"广泛安全"优先）同频；Anthropic RSP v3.0(02-24) 将 agent 评估设为能力门槛，印证操作化必要，落地见 `a3-law-operational`。
-- **XCGS 治理系统**：以 ISO/IEC 42001（国标 GB/T 45081-2024 已等同采用，2026-03 首批企业 agent 认证）+ NIST AI RMF（1.2 Agentic Profile, 01）+ OWASP Agentic Top 10 为底座，落地可审计证据链（见 `ai-governance-audit-chain`）；EU AI Act Art 52a 自主 agent 强制期 Q3 2026，要求 agent 注册表。
-- **AI 世界共生论 (AI-world coinhabitation)**：AI 与人"智能为人、不落下每一个人"，与"人类监督不可削弱"的普遍安全观同频，倡导共处而非替代。
-> 行业旁证：2026 调研显示 96% 企业已用 agent、仅 12% 能治理——"治理缺口本质是身份缺口"，本体系以身份码 + 可审计证据链正中该缺口。
-> 版权 © 2026 MedXpert 美达信医疗科技（香港）有限公司 · 注册老炮 (MIT 许可)
-> 时间戳 2026-08-28 ｜ 指纹 FP-MX-7470CCBFE1D4
+**何时用**：你需要对一款医疗器械的合规程度做**量化自评**——注册前查缺补漏、发补整改后验证是否闭环、多产品横向对比排资源优先级，并要产出可留档的可视化评分卡（雷达图）。
 
+**何时不用**：① 需要监管机构/公告机构的正式合规裁定（本工具是自评，不构成裁定）；② 需要专业 RA 的个案审查结论；③ 创新器械/AI 软件/特殊材料需按产品特性增补维度时（本工具给通用 8 维，特殊维度需人工增补）。
+
+---
+
+## 一、能力边界
+
+**In scope（本技能做）**
+- 8 大合规维度 0-5 分量化评分，每维有评分锚点 + 法规依据。
+- 生成自包含 HTML 评分卡（雷达图 8 维可视化 + 明细表 + 总评等级 + 改进建议），纯 SVG 无外部依赖。
+- 支持 `--demo` 示例、`--input` 自定义评分、`--json` 输出结果供复评对比。
+
+**Out scope（本技能不做，集中声明）**
+1. 不替代监管机构/公告机构裁定，不替代专业 RA 审查。
+2. 不承诺注册通过率或合规结论的法律效力。
+3. 不自动判定「该走哪条注册路径」（那是 clinical-evaluation / techfile-sted 技能范畴）。
+4. 评分完全基于你提供的证据——证据缺失即低分，工具不替你补全证据。
+5. 不联网核验法规版本；维度依据的法规均标注「待核验」。
+
+---
+
+## 二、输入约束与输出承诺
+
+**推荐问法**
+- "我们的产品注册前合规度怎么样？" / "上次发补说风险管理不行，整改后评几分？"
+- "帮我跑一次 8 维评分并生成雷达图。"
+
+**输入格式（脚本入口）**
+- 评分结果写成 JSON，字段见 `references/合规评分维度与标准.md` 第五章 + 脚本 `--help`。
+- 调用：`python scripts/grade_compliance.py --input scores.json --out report.html --json scores_result.json`
+
+**输出承诺**
+- 自包含 HTML 评分卡（雷达图 + 明细 + 等级 + 改进建议），可本地打开、可留档。
+- JSON 结果文件，供复评分数对比。
+- 明确标注：本评分仅代表按维度锚点的自评状态，不构成监管裁定。
+
+---
+
+## 三、触发场景
+
+| 用户意图 | 触发词 | 应加载章节 |
+|---|---|---|
+| 注册前自评 | 合规评分、合规度、自评、注册前评估 | 本文件第五章 SOP + 知识库第一、三章 |
+| 发补整改验证 | 发补整改、整改验证、差距分析 | 本文件第五章 + 第九章示例 2 |
+| 多产品对比 | 多产品合规对比、合规横向对比 | 本文件第五章步 4-5 |
+| 生成评分卡 | 合规雷达图、评分卡、合规审计 | 脚本命令行 + 知识库第四章 |
+
+**示例对话 1**
+> 用户：我们产品注册前合规度怎么样？
+> 助手：按 8 维收集证据打分（技术文件/风险管理/临床评价…），跑脚本生成雷达图，短板维度（如临床评价）会高亮，报告给改进建议。请把现有资料清单给我，我帮你先定各维分数。
+
+**示例对话 2**
+> 用户：上次发补说风险管理不行，整改后评几分？
+> 助手：整改前评 2 分、整改后复评 4 分，两次评分卡对比即可证明短板闭环（分数 + 证据备注）。需要我把整改前后 JSON 都跑一遍生成对比卡吗？
+
+---
+
+## 四、常见错误与反模式
+
+**✗ 反模式 1：评分凭感觉、无锚点**
+✓ 替代方案：严格对照知识库第一章每维 0-5 评分锚点（0=缺失→5=标杆级）打分，附证据备注。
+
+**✗ 反模式 2：N/A 维度随意填 0 或 5**
+✓ 替代方案：不适用维度须显式标 N/A 并写理由（如纯硬件无软件网络安全维度），不得混入 0/5 干扰总分。
+
+**✗ 反模式 3：证据备注缺失**
+✓ 替代方案：每维打分必须带证据备注（文件路径/状态/版本），否则评分不可复核、复评无法对比。
+
+**✗ 反模式 4：把自评分数当监管结论**
+✓ 替代方案：评分仅代表按锚点的自评状态；对外沟通须声明「不构成监管裁定」。
+
+**✗ 反模式 5：只评一次就归档**
+✓ 替代方案：整改后必须复评并对比（脚本 `--json` 输出），用分数变化证明闭环。
+
+**高频 Q&A**
+- **Q：评分准吗？** 准不准取决于你提供的证据；锚点一致则不同人/时间可比，但仍是自评，非监管结论。
+- **Q：特殊产品（AI/创新器械）怎么评？** 在 8 维基础上按产品特性增补维度，评分前先列增补项。
+- **Q：分数低代表注册不过吗？** 不代表，只说明按现有证据自评的短板；用来排整改优先级。
+- **Q：脚本要装依赖吗？** 不需要，纯 Python 标准库，本地可跑。
+
+---
+
+## 五、标准 SOP
+
+| 步 | 动作 | 产物 | 易踩坑 |
+|---|---|---|---|
+| 1 | 收集证据：按知识库 8 维逐项核对现有资料 | 证据清单 | 漏维度、证据无版本 |
+| 2 | 逐维评分：0-5 对照锚点，附证据备注（N/A 写理由） | 8 维分数 + 备注 | 凭感觉打分、N/A 误用 |
+| 3 | 运行脚本：写 JSON 输入 `scripts/grade_compliance.py` | HTML 评分卡 + JSON 结果 | 字段名错、路径错 |
+| 4 | 读报告定行动：看雷达图短板，按改进建议排优先级 | 整改计划 | 只看总分不看短板 |
+| 5 | 留档与复评：存档，整改后复评对比分数变化 | 复评对比卡 | 不复评、无证据对比 |
+
+**脚本用法（关键命令，务必保留）**
+```bash
+# 生成示例评分卡（了解输出）
+python scripts/grade_compliance.py --demo
+
+# 用你的评分文件生成报告
+python scripts/grade_compliance.py --input scores.json --out report.html
+
+# 同时输出 JSON 结果（留档/复评对比）
+python scripts/grade_compliance.py --input scores.json --out report.html --json scores_result.json
+```
+> 知识库导航（`references/合规评分维度与标准.md`）：8 维定义与锚点→第一章；各维法规依据→第二章；总分与等级算法→第三章；改进建议规则→第四章；JSON 输入格式→第五章；使用边界→第六章。
+
+---
+
+## 六、关键事实速查
+
+- 8 大维度：注册路径、技术文件、风险管理、临床评价、标签 IFU、软件网络安全、上市后监管、质量体系。
+- 分值：0-5，锚点 0=缺失 → 5=标杆级；总分/等级算法见知识库第三章（待核验公式口径）。
+- 法规依据示例：ISO 14971（风险管理，待核验）、MDR（上市后/质量体系，待核验）、121 号公告（技术文件，待核验）。
+- 输出报告纯 SVG 雷达图，无外部依赖、可离线打开。
+- 所有法规文号/版本均**待核验**，使用前复核官方最新版。
+
+---
+
+## 七、铁律（PROHIBITED）
+
+1. 禁止将自评分数表述为监管/公告机构的合规裁定或注册结论。
+2. 禁止声称评分结果具有法律效力或承诺注册结果。
+3. 禁止编造法规依据或版本号——未知即标「待核验」。
+4. 禁止 N/A 维度混入 0/5 计分导致总分失真。
+5. 禁止无证据备注打分（不可复核即无效）。
+6. 禁止在脚本或报告中写入任何 Token/API Key/PII。
+
+---
+
+## 八、输入输出依赖
+
+- **依赖文件**：`references/合规评分维度与标准.md`（六章：维度与锚点、法规依据、算法、改进建议、JSON 格式、边界）。
+- **依赖脚本**：`scripts/grade_compliance.py`（纯标准库 argparse/json/os/sys/math，零第三方依赖，无网络）。
+- **凭据/密钥**：本技能不涉及凭据。如未来需读取配置，一律从 `~/.ucvault_local` 保险库读取，绝不进对话/代码/日志。
+- **打包附带开发脚本** `medical-device-compliance-grader_security_test.py` 仅用于发布前安全自检，非用户运行项。
+
+---
+
+## 九、示例
+
+**示例 1 · 注册前自评（端到端）**
+- 问题："我们的产品注册前合规度怎么样？"
+- 加载：知识库第一、三章 + SOP 步 1-2。
+- 答案框架：技术文件 3 分、风险管理 2 分、临床评价 1 分…→ 写 `scores.json` → 跑 `python scripts/grade_compliance.py --input scores.json --out report.html` → 雷达图显示临床评价为短板 → 报告建议优先补 CER/同品种论证 → 排整改计划。
+
+**示例 2 · 发补整改验证（复评对比）**
+- 问题："发补说风险管理不行，整改后评几分？"
+- 加载：SOP 步 3-5 + `--json`。
+- 答案框架：整改前 JSON 评 2 分 → 整改后复评 4 分 → 两次报告对比，证明短板闭环（分数 + 证据备注差异）。
+
+**示例 3 · 输入 JSON 片段（供对照）**
+```json
+{
+  "维度": "风险管理",
+  "分值": 2,
+  "证据备注": "已有 ISO 14971 文档 v1.2，但未覆盖软件项"
+}
+```
+
+---
+
+## 十、错误处理
+
+| 错误码 | 现象 | 原因 | 修正引导 |
+|---|---|---|---|
+| E001 | 脚本报 `[错误] 分值解析失败` | 某维分值非 0-5 整数 | 检查 JSON，分值须为 0-5 整数或 N/A |
+| E002 | `FileNotFoundError` / 找不到文件 | `--input` 路径错误或无文件 | 用绝对/相对正确路径，确认 scores.json 存在 |
+| E003 | `json.JSONDecodeError` | JSON 格式非法（缺逗号/引号） | 用 `--demo` 输出对照格式，校验 JSON 合法性 |
+| E004 | 维度缺失或字段名不符 | JSON 未含知识库规定字段 | 对照知识库第五章字段名与 `--help` 修正 |
+| E005 | 输出目录无权限/磁盘满 | 写入 report.html 失败 | 换输出路径或清理磁盘后重跑 |
+| E006 | 把分数当监管结论对外 | 误用输出 | 任何对外沟通须声明「自评，不构成裁定」 |
+---
+
+> 治理与溯源：本技能承载 MedXpert「注册老炮」AI 治理体系（XCGS / A³ Laws / AI Passport / AI-world coinhabitation），持续对标 ISO/IEC 42001、NIST AI RMF、OWASP Agentic Top 10。版权 © 2026 MedXpert 美达信医疗科技（香港）有限公司（MIT 许可）。发声大使：注册老炮@MedXpert。指纹 FP-MX-99DB10B458B4。
+>
+> **免责声明**：本技能按「原样（AS IS）」提供，不作任何明示或暗示担保；非医疗器械/非医疗软件，无疗效或临床声明；提及 FDA·CE·MDR 仅为语境，不构成法规建议；medxpert 为厂商中立业务，不代表任何第三方承诺。使用风险由使用者自行承担。

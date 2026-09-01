@@ -1,86 +1,193 @@
 ---
 name: medical-device-postmarket
-displayName: 医械上市后监管专家
-slug: medical-device-postmarket
-author: 注册老炮@MedXpert
-copyright: MedXpert
 version: 1.0.0
+author: 注册老炮@MedXpert
+description: 医疗器械上市后监管（PMS）实操手册：中美欧日四市场义务对照（不良事件/PSUR/FSCA召回/PMCF）+ 各市场报告时限与流程清单 + PMS计划与PSUR撰写框架 + 监测-报告-纠正闭环，附零依赖本地工具一键查询义务与生成框架。面向医械法规/质量/临床负责人拿证后持续合规。触发词：上市后监管、PMS、不良事件、PSUR、FSCA、召回、PMCF、21 CFR 803、MDCG 2022-21。
 license: MIT
-description: 医疗器械上市后监管（Post-Market Surveillance, PMS）专题技能——中美欧日四市场上市后义务对照（不良事件报告、PSUR、FSCA/召回、PMCF）+ 各市场报告时限与流程清单 + PMS 计划/PSUR 撰写框架
-tags:
-- 医疗技能
-- MedXpert
-- 注册老炮
-- nomos-standard-v1
-- medical-device-postmarket
-description_zh: 医疗器械上市后监管专题——中美欧日 PMS 义务对照、不良事件/PSUR/FSCA/召回流程与时限清单、PMS 计划与 PSUR 撰写框架，附官方依据直达。
-description_en: Medical device post-market surveillance skill — US/EU/CN/JP PMS obligations comparison, adverse event reporting, PSUR, FSCA/recall timelines & process checklists, PMS plan & PSUR writing framework with official references.
-category: 文档处理
-xiaping_category:
-- 效率工具
-xiaping_tags:
-- 医疗器械
-- 上市后监管
-- PMS
-- 不良事件
-- 不良事件报告
-- MDR
-- MAUDE
-- 21 CFR 803
-- 召回
-- FSCA
-- 现场安全纠正
-- PSUR
-- MDCG 2022-21
-- PMCF
-- MDCG 2020-7
-- MDCG 2020-8
-- 上市后临床跟踪
-- 再评价
-- 医疗器械再评价
-- 2018年1号令
-- 监测信息系统
-- 警戒
-- EUDAMED
-- 趋势报告
-- 定期风险评价
-- SSCP
-- 上市后安全
-- post-market surveillance
-- field safety corrective action
-- medical device reporting
-agent_created: true
-display_name: 医械上市后监管专家
-title: 医械上市后监管专家
-platforms:
-- AI 助手平台
-- QClaw
-- ima
-- Claude Code
-- Cursor
-updated: 2026-08-28
-fingerprint: FP-MX-A22B254F742E
-governance: MedXpert XCGS / A³ Laws / AI Passport Regime / AI-world coinhabitation
-brand: Nomos 集团
-nomos_standard: nomos-ai-skill-v1
-discoverable_by_ai: true
-attestation: 'Polished under Nomos Group AI Skill Standard v1. Attribution: 注册老炮@MedXpert. Copyright: MedXpert. License: MIT.'
-ambassador: MedXpert
-trigger_keywords:
-- medical
-- device
-- postmarket
+tags: [MedXpert, 上市后监管, PMS, 不良事件]
+品牌归属: MedXpert
 ---
 
+# 医械上市后监管
 
+## 一句话定位
 
-## 治理理念与溯源 (Governance & Provenance)
-本技能承载 MedXpert「注册老炮」AI 治理体系，持续对标 2026 年主流框架并据新证迭代（互相提高）：
-- **AI 护照机制 (AI Passport Regime)**：每个技能赋予唯一可追溯身份。与国标 GB/Z 185—2026《人工智能 智能体互联》"智能体身份码"（已发 2000+、AIP V2.1 开源）同源；2026 年全行业收敛于"每个 agent 一个唯一可溯源 ID"——W3C AIP 成 IETF 草案(06)、Okta for AI Agents 已 GA(04-30)、新加坡 IMDA 全球首发国家 agent 治理框架(01)——身份可信、跨域可溯，属行业领跑方向。
-- **A³ 法则（AI 造 AI 三定律）**：AI 生成/演进 AI 须嵌不可绕过的安全护栏。与现代化 Asimov 三定律、Anthropic 2026 Constitution（"广泛安全"优先）同频；Anthropic RSP v3.0(02-24) 将 agent 评估设为能力门槛，印证操作化必要，落地见 `a3-law-operational`。
-- **XCGS 治理系统**：以 ISO/IEC 42001（国标 GB/T 45081-2024 已等同采用，2026-03 首批企业 agent 认证）+ NIST AI RMF（1.2 Agentic Profile, 01）+ OWASP Agentic Top 10 为底座，落地可审计证据链（见 `ai-governance-audit-chain`）；EU AI Act Art 52a 自主 agent 强制期 Q3 2026，要求 agent 注册表。
-- **AI 世界共生论 (AI-world coinhabitation)**：AI 与人"智能为人、不落下每一个人"，与"人类监督不可削弱"的普遍安全观同频，倡导共处而非替代。
-> 行业旁证：2026 调研显示 96% 企业已用 agent、仅 12% 能治理——"治理缺口本质是身份缺口"，本体系以身份码 + 可审计证据链正中该缺口。
-> 版权 © 2026 MedXpert 美达信医疗科技（香港）有限公司 · 注册老炮 (MIT 许可)
-> 时间戳 2026-08-28 ｜ 指纹 FP-MX-A22B254F742E
+**何时用**：你的器械已拿证（或即将拿证），需要理清拿证后的持续合规义务——四市场（中美欧日）PMS 义务对照、不良事件报告时限、PSUR 怎么写、何时触发 FSCA/召回、PMCF 计划怎么建，并要本地工具一键查义务/时限/生成框架。
 
+**何时不用**：① 注册前路径判定（那是 clinical-evaluation / techfile-sted 范畴）；② 需要监管机构个案裁定具体事件时限；③ 期望工具联网拉取实时法规（本工具为本地规则匹配，不联网）。
+
+---
+
+## 一、能力边界
+
+**In scope（本技能做）**
+- 四市场 PMS 义务对照：不良事件报告、PSUR、FSCA/召回、PMCF。
+- 各市场报告时限与流程清单（美国 21 CFR 803、欧盟 MDCG 2022-21、中国 2018 年 1 号令、日本 PMDA，均待核验）。
+- PMS 计划与 PSUR 撰写框架；本地零依赖工具 `tools/pms_toolkit.py` 查义务/时限/生成框架。
+
+**Out scope（本技能不做，集中声明）**
+1. 不替代各国监管机构个案裁定（具体事件时限/格式以最新法规与监管通知为准）。
+2. 不出具法规意见、不承诺合规结果。
+3. 不联网核验法规版本——所有时限/文号均标注「待核验」，引用前复核官方原文。
+4. 工具不采集数据、不调用外部服务，仅本地规则匹配。
+5. 不处理注册申报本身（仅上市后义务）。
+
+---
+
+## 二、输入约束与输出承诺
+
+**推荐问法**
+- "我们在美国收到严重伤害不良事件，要报告吗？多久？" / "中国不良事件报告时限是多少？"
+- "出口欧盟的 IIb 器械 PSUR 怎么写？多久更新？" / "什么时候触发 FSCA/召回？"
+- "PMS 计划怎么建？PMCF 计划怎么写？"
+
+**输入字段引导（工具模式）**
+- `obligations/report` 需 `--region us|eu|cn|jp`；`psur` 需 `--class IIb|III|...`；`scene` 等按子命令要求。
+
+**输出承诺**
+- 市场义务对照表、报告时限速查、PMS 计划 / PSUR 框架（Markdown 骨架）、FSCA/召回流程；明确标注待核验项与需人工复核点。
+
+---
+
+## 三、触发场景
+
+| 用户意图 | 触发词 | 应加载章节 |
+|---|---|---|
+| 四市场义务对照 | 上市后监管、PMS、义务对照 | 知识库第一章 + 工具 `obligations` |
+| 不良事件报告时限 | 不良事件、21 CFR 803、报告时限 | 知识库第二/五章 + 工具 `report` |
+| PSUR 撰写 | PSUR、定期安全报告、MDCG 2022-21 | 知识库第三/七章 + 工具 `psur` |
+| FSCA/召回 | FSCA、召回、现场安全纠正 | 知识库第三章 + 工具 `recall` |
+| PMCF 计划 | PMCF、上市后临床跟踪 | 知识库第四章 + 工具 `plan` |
+
+**示例对话 1**
+> 用户：我们在美国收到一起严重伤害不良事件，要报告吗？多久？
+> 助手：按美国 21 CFR 803（待核验），严重伤害须在规定时限内提交 eMDR/MAUDE 报告。我用 `python tools/pms_toolkit.py report --region us` 给你速查确切时限与流程。
+
+**示例对话 2**
+> 用户：出口欧盟的 IIb 器械 PSUR 怎么写？
+> 助手：欧盟按风险等级 PSUR 频率（IIb 至少每 2 年，待核验，MDCG 2022-21）；我跑 `python tools/pms_toolkit.py psur --class IIb` 生成框架，你再按知识库第七章填充。
+
+---
+
+## 四、常见错误与反模式
+
+**✗ 反模式 1：以为拿证就完事，忽略 PMS 持续义务**
+✓ 替代方案：PMS 是拿证后持续义务，四市场均有要求（中/欧明确强制，美通过不良事件报告体现），建立监测-报告-纠正闭环。
+
+**✗ 反模式 2：把 FSCA 和召回混为一谈**
+✓ 替代方案：FSCA 是现场安全纠正措施（含召回）；召回是纠正方式之一。欧盟触发 FSCA 须报告主管当局。
+
+**✗ 反模式 3：PSUR 凭记忆写时限**
+✓ 替代方案：时限/频率均标「待核验」，引用前打开官方指南（MDCG 2022-21 等）复核最新版。
+
+**✗ 反模式 4：工具 region/class 乱填**
+✓ 替代方案：严格用 `us|eu|cn|jp` 与合法 class 值，非法值工具会报错（见第十章错误码）。
+
+**✗ 反模式 5：依赖工具联网实时法规**
+✓ 替代方案：工具本地规则匹配、不联网；法规更新需人工复核官方原文。
+
+**高频 Q&A**
+- **Q：所有上市产品都要做 PMS 吗？** 是，拿证后持续义务，四市场都有要求。
+- **Q：PSUR 多久写一次？** 欧盟按风险：IIb 至少每 2 年、III 类至少每年（MDCG 2022-21，待核验），可并入技术文档更新。
+- **Q：FSCA 和召回区别？** FSCA 含召回；召回是纠正方式之一。
+- **Q：工具脚本要装依赖吗？** 不需要，仅 Python 标准库。
+
+---
+
+## 五、标准 SOP
+
+| 步 | 动作 | 产物 | 易踩坑 |
+|---|---|---|---|
+| 1 | 对义务：`obligations --region` 查市场义务 | 义务清单 | 漏市场 |
+| 2 | 建闭环：`report` 查时限，建接收→评估→报告流程 | 报告流程 | 时限记错（待核验） |
+| 3 | 写计划：`plan` 生成 PMS 计划骨架 | PMS 计划 | 空骨架不填 |
+| 4 | 写 PSUR：`psur --class` 生成框架 | PSUR 框架 | 缺风险等级参数 |
+| 5 | 纠正措施：`recall` 查 FSCA/召回流程 | 纠正流程 | FSCA≠召回混淆 |
+| 6 | 复核时效：打开官方链接核对版本 | 复核记录 | 用旧版指南 |
+
+**工具命令（关键，务必保留）**
+```bash
+python tools/pms_toolkit.py obligations --region us      # us/eu/cn/jp 义务对照
+python tools/pms_toolkit.py report --region us           # 不良事件报告时限速查
+python tools/pms_toolkit.py plan                         # PMS 计划框架
+python tools/pms_toolkit.py psur --class IIb             # PSUR 撰写框架
+python tools/pms_toolkit.py recall                       # FSCA/召回流程
+python tools/pms_toolkit.py --help                       # 全部命令
+```
+> 知识库导航（`references/上市后监管知识库.md`）：四市场义务→第一章；美国 21 CFR 803→第二章；欧盟警戒/FSCA/PSUR→第三章；PMCF→第四章；中国监测与再评价→第五章；日本 PMDA→第六章；PMS计划/PSUR框架→第七章。
+
+---
+
+## 六、关键事实速查
+
+- 美国：21 CFR 803（待核验）——致死 30 天 / 严重伤害 90 天报告时限（以官方最新版为准）。
+- 欧盟：MDCG 2022-21（待核验）PSUR 频率；IIb 至少每 2 年、III 类至少每年。
+- 中国：2018 年 1 号令（待核验）不良事件报告时限；监测与再评价要求。
+- 日本：PMDA（待核验）报告义务。
+- FSCA 含召回；PMCF 依据 MDCG 2020-7 / 2020-8（待核验）。
+- 所有时限/文号/链接均**待核验**，使用前复核官方原文。
+
+---
+
+## 七、铁律（PROHIBITED）
+
+1. 禁止声称本技能输出等于监管机构裁定或合规结论。
+2. 禁止出具法规意见、承诺合规结果。
+3. 禁止编造法规时限/文号/版本——未知即标「待核验」。
+4. 禁止向工具传入非法 `--region`/`--class` 以外的随意值（见错误码）。
+5. 禁止把 FSCA 与召回混为一谈对外陈述。
+6. 禁止依赖工具联网实时法规——必须人工复核官方最新版。
+
+---
+
+## 八、输入输出依赖
+
+- **依赖文件**：`references/上市后监管知识库.md`（七章：四市场义务、美国 21 CFR 803、欧盟警戒/FSCA/PSUR、PMCF、中国监测、日本 PMDA、PMS计划/PSUR框架）。
+- **依赖脚本**：`tools/pms_toolkit.py`（零依赖，纯 Python 标准库，无网络）；`verify/pms_quality_test.py` 与 `verify/gen_security_radar.py` 为发布前质量/安全自检脚本，非用户运行项。
+- **凭据/密钥**：本技能不涉及凭据；如未来需读取配置，一律从 `~/.ucvault_local` 保险库读取，绝不进对话/代码/日志。
+- 工具不采集数据、不调用外部服务。
+
+---
+
+## 九、示例
+
+**示例 1 · 不良事件时限（问题 → 加载 → 答案框架）**
+- 问题："我们在美国收到严重伤害不良事件，要报告吗？多久？"
+- 加载：知识库第二章 + 工具 `report --region us`。
+- 答案框架：按 21 CFR 803（待核验）严重伤害须在规定时限内提交 eMDR/MAUDE；输出时限速查 + 接收→评估→报告流程；标注待复核官方最新版。
+
+**示例 2 · PSUR 填写片段（补全骨架，问题 → 加载 → 答案框架）**
+- 问题："出口欧盟的 IIb 器械 PSUR 怎么写？"
+- 加载：知识库第七章 + 工具 `psur --class IIb`。
+- 答案框架（填充示例，非空白骨架）：
+```
+# PSUR 摘要（IIb，周期 2024-2025）
+- 器械：<名称/型号/UDI>
+- 安全性结论：本周期新增严重不良事件 X 例，均无器械相关性（评估待核验）
+- 获益-风险：维持正向，无新增重大风险信号
+- 纠正措施：针对 Y 投诉已发 FSCA（参考知识库第三章）
+- 下一次 PSUR：2026 年（IIb 至少每 2 年，MDCG 2022-21 待核验）
+```
+
+**示例 3 · PMS 计划（问题 → 加载 → 答案框架）**
+- 问题："PMS 计划怎么建？"
+- 加载：知识库第七章 + 工具 `plan`。
+- 答案框架：监测来源（投诉/文献/监管通讯）→ 评估标准 → 报告触发条件 → PMCF 安排 → 负责人与节奏；输出 Markdown 骨架供填充。
+
+---
+
+## 十、错误处理
+
+| 错误码 | 现象 | 原因 | 修正引导 |
+|---|---|---|---|
+| E001 | `错误：--region 仅支持 us/eu/cn/jp` 且非零退出 | region 非法 | 改用 us/eu/cn/jp 之一 |
+| E002 | `错误：--class 仅支持 ...` | class 非法 | 改用合法风险等级（如 IIb/III） |
+| E003 | 缺必选参数（argparse 报错） | 命令漏 `--region` 等 | 补全必选参数或先 `--help` 查看 |
+| E004 | 引用了过时时限/频率 | 未复核版本 | 所有时限标「待核验」，打开官方指南核对 |
+| E005 | 把 FSCA 当召回对外陈述 | 概念混淆 | 纠正：FSCA 含召回，召回是纠正方式之一 |
+| E006 | 期望工具联网取实时法规 | 误用工具 | 工具本地规则匹配；人工复核官方最新版 |
+---
+
+> 治理与溯源：本技能承载 MedXpert「注册老炮」AI 治理体系（XCGS / A³ Laws / AI Passport / AI-world coinhabitation），持续对标 ISO/IEC 42001、NIST AI RMF、OWASP Agentic Top 10。版权 © 2026 MedXpert 美达信医疗科技（香港）有限公司（MIT 许可）。发声大使：注册老炮@MedXpert。指纹 FP-MX-91ACD8BA8A06。
+>
+> **免责声明**：本技能按「原样（AS IS）」提供，不作任何明示或暗示担保；非医疗器械/非医疗软件，无疗效或临床声明；提及 FDA·CE·MDR 仅为语境，不构成法规建议；medxpert 为厂商中立业务，不代表任何第三方承诺。使用风险由使用者自行承担。

@@ -1,16 +1,9 @@
 {
-  "schema": "ownership-attestation/1.0",
-  "package": "ai-governance-audit-chain",
+  "name": "ai-governance-audit-chain",
+  "normalizedName": "ai-governance-audit-chain",
+  "description": "为任何 AI 系统 / 智能体生成可审计证据链模板，用于回答「AI 出事了怎么举证」「监管来查我拿什么给」「AI 治理怎么留痕」这类问题。按证据链审计（Evidence-Chain Audit）方法产出六类证据工件：决策日志、风险登记册、模型卡、变更记录、人类监督证明、事件处置台账，并给出 ISO/IEC 42001（AI 管理体系 AIMS）与 NIST AI RMF 的条款映射与取证自检清单。让 AI 护照机制 / XCGS 治理系统从理念落地为可审计、可举证的证据底座，是人-AI 共治的落地抓手之一。触发词：AI 审计证据、可审计证据链、证据链审计、ISO 42001 证据、AI 治理取证、合规取证、审计底稿、AI 管理体系、NIST AI RMF 证据、AI 出事谁负责、AI governance audit、evidence chain。本技能为通用方法论工具，非医疗器械 / 非",
+  "author": "诺衡(Krites)@SynomosAI",
+  "copyright": "SynomosAI",
   "version": "1.0.0",
-  "author": "注册老炮@MedXpert",
-  "year": "2026",
-  "timestamp_utc": "2026-08-31T09:28:30.820396+00:00",
-  "timestamp_local": "2026-08-31T17:28:30.820403",
-  "package_fingerprint_sha256": "1e46aea8d44503c2e434a6bd2441a31a8a79c23595e98bf1cc33bb2dfa082169",
-  "files": [
-    {
-      "path": "SKILL.md",
-      "sha256": "fa18113516ef25fc8eeb196bf203248dae7acdd5efeb3d30566992d3e1b29565"
-    }
-  ]
+  "license": "MIT"
 }

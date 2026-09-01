@@ -15,7 +15,7 @@
 
 > 评 AI 生态 · 第九视角
 > 配套引擎：`ai-grader` 的 `grade_stats.py`（`--persona '<json>'` / `--persona-seed` → `persona.html`）
-> 作者：注册老炮 ｜ 版本：随 ai-grader v1.8.0
+> 作者：SynomosAI ｜ 版本：随 ai-grader v1.8.0
 
 ---
 

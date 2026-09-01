@@ -1,86 +1,176 @@
 ---
 name: medical-device-techfile-sted
-displayName: 医械技术文件STED专家
-slug: medical-device-techfile-sted
-author: 注册老炮@MedXpert
-copyright: MedXpert
 version: 1.0.0
+author: 注册老炮@MedXpert
+description: 医疗器械技术文件（Technical Documentation）与 STED 专题技能：以 IMDRF STED 六章为骨架，映射欧盟 MDR Annex II/III、美国 510(k) Summary/eSTAR、中国 121/122 号公告申报资料、日本技术资料的结构差异，附撰写要点与官方入口直达。面向写一套多市场复用的注册技术文件。触发词：技术文件、技术文档、STED、MDR Annex II、510(k) Summary、eSTAR、eRPS、注册申报资料、121号公告、122号公告、DHF、DMR。
 license: MIT
-description: 医疗器械技术文件（Technical Documentation）与 STED（Summary Technical Documentation）专题技能——IMDRF STED 六章结构 + 欧盟 MDR Annex II/III 技术文档…
-tags:
-- 医疗技能
-- MedXpert
-- 注册老炮
-- nomos-standard-v1
-- medical-device-techfile-sted
-description_zh: 医疗器械技术文件与STED专题——IMDRF STED 六章、MDR Annex II/III、510(k) Summary/eSTAR、中国121/122号公告申报资料、日本技术资料对照与撰写要点，官方入口直达。
-description_en: Medical device technical documentation & STED skill — IMDRF STED 6-chapter structure, EU MDR Annex II/III, FDA 510(k) Summary/eSTAR, CN submission files (Notice 121/122), JP technical files comparison & writing points with official references.
-category: 文档处理
-xiaping_category:
-- 效率工具
-xiaping_tags:
-- 医疗器械
-- 技术文件
-- 技术文档
-- STED
-- Summary Technical Documentation
-- IMDRF
-- GHTF
-- MDR Annex II
-- MDR Annex III
-- 技术文档结构
-- 510(k) Summary
-- eSTAR
-- eRPS
-- 注册申报资料
-- 121号公告
-- 122号公告
-- DHF
-- DMR
-- ISO 13485
-- 医疗器械档案
-- 设计控制
-- 21 CFR 820.30
-- '807.92'
-- 技术文档撰写
-- CTD
-- 医疗器械注册
-- technical documentation
-- technical file
-- design history file
-agent_created: true
-display_name: 医械技术文件STED专家
-title: 医械技术文件STED专家
-platforms:
-- AI 助手平台
-- QClaw
-- ima
-- Claude Code
-- Cursor
-updated: 2026-08-28
-fingerprint: FP-MX-02E036C41713
-governance: MedXpert XCGS / A³ Laws / AI Passport Regime / AI-world coinhabitation
-brand: Nomos 集团
-nomos_standard: nomos-ai-skill-v1
-discoverable_by_ai: true
-attestation: 'Polished under Nomos Group AI Skill Standard v1. Attribution: 注册老炮@MedXpert. Copyright: MedXpert. License: MIT.'
-ambassador: MedXpert
-trigger_keywords:
-- medical
-- device
-- techfile
-- sted
+tags: [MedXpert, 技术文件, STED, 注册申报]
+品牌归属: MedXpert
 ---
 
+# 医械技术文件STED专家
 
+## 一句话定位
 
-## 治理理念与溯源 (Governance & Provenance)
-本技能承载 MedXpert「注册老炮」AI 治理体系，持续对标 2026 年主流框架并据新证迭代（互相提高）：
-- **AI 护照机制 (AI Passport Regime)**：每个技能赋予唯一可追溯身份。与国标 GB/Z 185—2026《人工智能 智能体互联》"智能体身份码"（已发 2000+、AIP V2.1 开源）同源；2026 年全行业收敛于"每个 agent 一个唯一可溯源 ID"——W3C AIP 成 IETF 草案(06)、Okta for AI Agents 已 GA(04-30)、新加坡 IMDA 全球首发国家 agent 治理框架(01)——身份可信、跨域可溯，属行业领跑方向。
-- **A³ 法则（AI 造 AI 三定律）**：AI 生成/演进 AI 须嵌不可绕过的安全护栏。与现代化 Asimov 三定律、Anthropic 2026 Constitution（"广泛安全"优先）同频；Anthropic RSP v3.0(02-24) 将 agent 评估设为能力门槛，印证操作化必要，落地见 `a3-law-operational`。
-- **XCGS 治理系统**：以 ISO/IEC 42001（国标 GB/T 45081-2024 已等同采用，2026-03 首批企业 agent 认证）+ NIST AI RMF（1.2 Agentic Profile, 01）+ OWASP Agentic Top 10 为底座，落地可审计证据链（见 `ai-governance-audit-chain`）；EU AI Act Art 52a 自主 agent 强制期 Q3 2026，要求 agent 注册表。
-- **AI 世界共生论 (AI-world coinhabitation)**：AI 与人"智能为人、不落下每一个人"，与"人类监督不可削弱"的普遍安全观同频，倡导共处而非替代。
-> 行业旁证：2026 调研显示 96% 企业已用 agent、仅 12% 能治理——"治理缺口本质是身份缺口"，本体系以身份码 + 可审计证据链正中该缺口。
-> 版权 © 2026 MedXpert 美达信医疗科技（香港）有限公司 · 注册老炮 (MIT 许可)
-> 时间戳 2026-08-28 ｜ 指纹 FP-MX-02E036C41713
+**何时用**：你在搭建或撰写医疗器械注册的技术文件（Technical Documentation）——想以 IMDRF STED 六章为统一骨架，一套写完后映射到各国章节（欧盟 MDR Annex II/III、美国 510(k) Summary/eSTAR、中国 121/122 号公告、日本技术资料），最大化复用、避免重复。
 
+**何时不用**：① 仅做临床评价模块（那是 clinical-evaluation 技能范畴）；② 需要审评中心/公告机构个案裁定；③ 期望工具联网实时核验法规版本（本技能为纯文档型，法规均标注「待核验」）。
+
+---
+
+## 一、能力边界
+
+**In scope（本技能做）**
+- IMDRF STED 六章结构骨架；各国技术文档结构差异对照表（STED/MDR/510(k)/121 号公告/日本）。
+- 各模块撰写要点；官方入口直达（eSTAR、eRPS、IMDRF 文档库、EUR-Lex）。
+- 证据链复用方法：描述→风险→验证→临床→标签，写一套、映射各国。
+
+**Out scope（本技能不做，集中声明）**
+1. 不替代审评中心/公告机构对具体产品的裁定。
+2. 不出具法规意见、不承诺注册结果、不代理提交。
+3. 不生成可直接提交的完整技术文件原文（只给骨架、对照表、撰写要点）。
+4. 不联网核验法规版本——所有模板版本/文号/链接均标注「待核验」。
+5. 不处理临床评价专项（见 clinical-evaluation 技能）。
+
+---
+
+## 二、输入约束与输出承诺
+
+**推荐问法**
+- "产品要出中/欧/美，技术文件怎么写才不重复？" / "美国 510(k) 用什么提交？"
+- "MDR 技术文档 Annex II 怎么组织？" / "中国 121 号公告申报资料怎么搭？"
+
+**字段引导（为给出精准映射）**
+- 目标市场（NMPA/MDR/FDA/JP，可多选）；器械类别（影响提交物与审评方式）。
+
+**输出承诺**
+- STED 六章骨架；各国章节映射表；逐章撰写要点；官方入口索引（待核验）；明确告知哪些需人工复核、哪些超出本技能范围。
+
+---
+
+## 三、触发场景
+
+| 用户意图 | 触发词 | 应加载章节 |
+|---|---|---|
+| 文档类型/骨架 | 技术文件、STED、Summary Technical Documentation | 知识库第一、二章 |
+| 美国路径 | 510(k) Summary、eSTAR、DHF/DMR、807.92 | 知识库第三章 |
+| 欧盟路径 | MDR 技术文档、Annex II/III、GSPR | 知识库第四章 |
+| 中国路径 | 注册申报资料、eRPS、121/122 号公告 | 知识库第五章 |
+| 日本路径 | 日本技术资料 | 知识库第六章 |
+| 结构差异对照 | 技术文档结构、文档差异对照 | 知识库第七章 |
+
+**示例对话 1**
+> 用户：产品要出中国、欧盟、美国，技术文件怎么写才不重复？
+> 助手：以 STED 六章（器械描述/基本信息/设计与制造/通用安全性能原则/风险分析/验证与确认）为骨架写一套，再按市场映射：中国补综述资料/技术要求（121 号公告）、欧盟补 GSPR 符合性（Annex II 第 4 章）、美国补 SE 论证与 Summary（807.92）。证据链一次建立处处引用。
+
+**示例对话 2**
+> 用户：美国 510(k) 用什么提交？
+> 助手：用 FDA eSTAR 电子模板（当前版本以 FDA 官网最新版为准，待核验）强制电子提交；Summary 必备：器械名称/分类/预期用途、predicate 对比、技术特征、性能数据摘要、标准符合性、标签要点。
+
+---
+
+## 四、常见错误与反模式
+
+**✗ 反模式 1：每个市场各写一套，重复劳动**
+✓ 替代方案：以 STED 六章为统一骨架，写一套、按市场映射，证据链（描述→风险→验证→临床→标签）处处引用。
+
+**✗ 反模式 2：忽略 eSTAR 版本更新**
+✓ 替代方案：eSTAR 模板滚动升级，使用前打开 FDA 官网核对最新版（待核验），不自带旧模板填报。
+
+**✗ 反模式 3：各国章节对照错位**
+✓ 替代方案：用知识库第七章结构差异对照表逐条对齐，避免"这段归哪国哪一章"混淆。
+
+**✗ 反模式 4：证据链断裂（风险与验证不呼应）**
+✓ 替代方案：风险分析结论须由验证与确认数据支撑，标签与临床结论呼应，形成闭环。
+
+**✗ 反模式 5：把骨架当完整提交物**
+✓ 替代方案：骨架+撰写要点是组织框架，正式提交前须填实内容并核对官方要求。
+
+**高频 Q&A**
+- **Q：STED 六章是什么？** 器械描述与规格/基本信息（标签）/设计与制造/通用安全性能原则/风险分析/验证与确认。
+- **Q：eSTAR 必须电子提交吗？** 当前 FDA 要求电子提交，模板版本以官网最新为准（待核验）。
+- **Q：中国申报资料按什么？** 121/122 号公告（待核验），含综述资料/研究资料等模块（eRPS 六模块）。
+- **Q：法规过时怎么办？** 所有版本/链接标「待核验」，使用前复核官方原文。
+
+---
+
+## 五、标准 SOP
+
+| 步 | 动作 | 产物 | 易踩坑 |
+|---|---|---|---|
+| 1 | 定市场与类别：明确 NMPA/MDR/FDA/JP 与目标分类 | 市场-类别清单 | 漏市场导致结构错位 |
+| 2 | 以 STED 六章搭骨架 | 统一骨架 | 跳过骨架各写一套 |
+| 3 | 按市场映射：用对照表补各国特有章节 | 映射表 | 对照错位 |
+| 4 | 逐章撰写：每章按要点组织，证据链互引 | 章节草稿 | 证据链断裂 |
+| 5 | 提交前自查：用差异对照表核对完整性 | 自检清单 | 漏章节/漏官方入口 |
+| 6 | 复核时效：打开官方链接核对模板版本 | 复核记录 | 用旧版 eSTAR/公告 |
+
+> 知识库导航（`references/技术文件STED知识库.md`）：文档类型对照→第一章；STED 六章→第二章；美国 510(k)/eSTAR→第三章；欧盟 MDR→第四章；中国申报资料→第五章；日本→第六章；结构差异对照表→第七章。
+
+---
+
+## 六、关键事实速查
+
+- STED 六章：器械描述与规格 / 基本信息（标签）/ 设计与制造 / 通用安全性能原则 / 风险分析 / 验证与确认。
+- 美国：510(k) Summary 必备内容（名称/分类/用途、predicate 对比、技术特征、性能数据摘要、标准符合性、标签）；eSTAR 强制电子提交（版本待核验）；依据 21 CFR 807.92。
+- 欧盟：MDR Annex II（技术文档六章）/ Annex III（非 EU 符合性声明）；GSPR 符合性章节（Annex II 第 4 章）。
+- 中国：121/122 号公告申报资料（待核验），eRPS 六模块；综述资料/技术要求等。
+- 日本：技术资料对照（待核验）。
+- 所有模板版本/文号/链接均**待核验**，使用前复核官方原文。
+
+---
+
+## 七、铁律（PROHIBITED）
+
+1. 禁止声称本技能输出等于审评中心/公告机构裁定或注册结论。
+2. 禁止出具法规意见、承诺注册结果、代理提交。
+3. 禁止编造法规文号/模板版本/官方链接——未知即标「待核验」。
+4. 禁止每个市场各写一套而放弃 STED 统一骨架复用。
+5. 禁止证据链断裂（风险/验证/临床/标签互不呼应）。
+6. 禁止忽略 eSTAR/公告版本更新——必须复核官方最新版。
+
+---
+
+## 八、输入输出依赖
+
+- **依赖文件**：`references/技术文件STED知识库.md`（七章：文档类型对照、STED 六章、美国、欧盟、中国、日本、结构差异对照表）。
+- **无外部脚本**：本技能为纯文档型，加载知识库即可运行。
+- **凭据/密钥**：本技能不涉及任何 Token/API Key/PII。如未来接入需凭据工具，一律从本地保险库 `~/.ucvault_local` 读取，绝不进入对话、代码或日志。
+- **打包附带开发自测脚本** `medical-device-techfile-sted_security_test.py` 仅用于发布前包安全自检（敏感信息/外链/命令执行扫描），非用户运行项，请勿在正常使用中调用。
+
+---
+
+## 九、示例
+
+**示例 1 · 写一套多市场用（问题 → 加载 → 答案框架）**
+- 问题："产品要出中国、欧盟、美国，技术文件怎么写才不重复？"
+- 加载：知识库第二、七章 + 第五章 SOP 步 2-3。
+- 答案框架：STED 六章为骨架写一套 → 中国补综述资料/技术要求（121 号公告）→ 欧盟补 GSPR 符合性（Annex II 第 4 章）→ 美国补 SE 论证与 Summary（807.92）→ 证据链（描述→风险→验证→临床→标签）一次建立、处处引用。
+
+**示例 2 · eSTAR 提交（问题 → 加载 → 答案框架）**
+- 问题："美国 510(k) 用什么提交？"
+- 加载：知识库第三章。
+- 答案框架：FDA eSTAR 电子模板（最新版待核验）强制电子提交；Summary 必备：器械名称/分类/预期用途、predicate 对比、技术特征、性能数据摘要、标准符合性、标签要点。输出 Summary 清单。
+
+**示例 3 · 结构差异自查（问题 → 加载 → 答案框架）**
+- 问题："MDR 技术文档 Annex II 怎么组织？"
+- 加载：知识库第四章 + 第七章对照表。
+- 答案框架：按 Annex II 六章组织，对照 STED 映射 GSPR 符合性章节；输出章节对照表与逐章撰写要点。
+
+---
+
+## 十、错误处理
+
+| 错误码 | 现象 | 原因 | 修正引导 |
+|---|---|---|---|
+| E001 | 引用了旧版 eSTAR/公告/模板 | 未复核版本 | 所有版本标「待核验」，打开官方原文核对最新版 |
+| E002 | 未给市场/类别就要求结构结论 | 输入不足 | 请补充目标市场（NMPA/MDR/FDA/JP）与器械类别 |
+| E003 | 各国章节对照错位 | 跳过差异对照表 | 用知识库第七章结构差异对照表逐条对齐 |
+| E004 | 证据链断裂（风险无验证支撑） | 撰写不全 | 风险分析须由验证与确认数据支撑，标签与临床呼应 |
+| E005 | 误以为骨架=完整提交物 | 概念混淆 | 骨架+要点是框架，正式提交前须填实并核对官方要求 |
+| E006 | 问的是临床评价专项 | 超出本技能范围 | 引导至 clinical-evaluation 技能处理 CER/同品种/路径 |
+---
+
+> 治理与溯源：本技能承载 MedXpert「注册老炮」AI 治理体系（XCGS / A³ Laws / AI Passport / AI-world coinhabitation），持续对标 ISO/IEC 42001、NIST AI RMF、OWASP Agentic Top 10。版权 © 2026 MedXpert 美达信医疗科技（香港）有限公司（MIT 许可）。发声大使：注册老炮@MedXpert。指纹 FP-MX-227D1274676A。
+>
+> **免责声明**：本技能按「原样（AS IS）」提供，不作任何明示或暗示担保；非医疗器械/非医疗软件，无疗效或临床声明；提及 FDA·CE·MDR 仅为语境，不构成法规建议；medxpert 为厂商中立业务，不代表任何第三方承诺。使用风险由使用者自行承担。

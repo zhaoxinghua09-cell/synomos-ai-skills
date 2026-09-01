@@ -1,0 +1,9 @@
+{
+  "name": "brain-design-benchmark",
+  "normalizedName": "brain-design-benchmark",
+  "description": "评估任何「类人 AI 大脑设计」（方法论 / 多智能体组织 / 自研架构）的框架，用于回答「我这套 AI 大脑设计到底行不行」「跟真人脑差在哪」「跟前沿架构比落后多少」这类问题。把设计当作一个统一智能体，与真实人脑、脑科学既有证据、以及 2026 前沿 AI 架构做三向对标，输出诚实结论、差距三档分诊与改善路线图。全程按真实参照法（Grounded Reference Method）执行——每条判断挂得出外部参照，无来源不主张；禁用\"最 / 全球首创\"等绝对词。触发词：AI 大脑设计评估、类人架构对标、多智能体组织评估、差距分诊、我的架构行不行、brain design benchmark、architecture review。本技能为通用方法论工具，非医疗器械 / 非医疗软件，无疗效或临床声明；详见包内免责声明。",
+  "author": "诺衡(Krites)@SynomosAI",
+  "copyright": "SynomosAI",
+  "version": "1.0.0",
+  "license": "MIT"
+}

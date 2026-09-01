@@ -1,0 +1,9 @@
+{
+  "name": "code-mentor",
+  "normalizedName": "code-mentor",
+  "description": "全能 AI 编程导师，通过苏格拉底式教学法提供交互式编程学习、代码审查、调试指导、算法练习、项目指导与设计模式讲解，用于回答「这段代码为什么错」「怎么从零学 Python」「面试算法怎么练」这类问题。审查与讲解按真实参照法执行——结论挂到语言规范、官方文档或可运行验证，不凭感觉断言。支持 Python / JavaScript。触发词：教我编程、帮我调试、代码审查、学 Python、学 JavaScript、编程导师、算法题、设计模式、面试准备、编程入门、code review、debug this、teach me、mock interview。本技能为通用方法论工具，非医疗器械 / 非医疗软件，无疗效或临床声明；详见包内免责声明。",
+  "author": "诺声(Logos)@SynomosAI",
+  "copyright": "SynomosAI",
+  "version": "1.0.0",
+  "license": "MIT"
+}

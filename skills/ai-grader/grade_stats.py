@@ -920,7 +920,7 @@ CARD_TEMPLATE = r"""<!DOCTYPE html>
       <span class="chip r">🔧 最该补：__TOP_WEAK__</span>
     </div>
     <div class="foot">
-      <span>由 <span class="brand">ai-grader</span> 生成 · 注册老炮</span>
+      <span>由 <span class="brand">ai-grader</span> 生成 · SynomosAI</span>
       <span>本地客观测评 · 可比可晒</span>
     </div>
   </div>
@@ -1158,7 +1158,7 @@ FIT_TEMPLATE = r"""<!DOCTYPE html>
       <ul>__TARGET__</ul>
     </div>
     <div class="foot">
-      <span>由 <span class="brand">ai-grader</span> 生成 · 注册老炮</span>
+      <span>由 <span class="brand">ai-grader</span> 生成 · SynomosAI</span>
       <span>领域适配评估 · 比通用体检更对口</span>
     </div>
   </div>
@@ -1412,7 +1412,7 @@ PERSONA_TEMPLATE = r"""<!DOCTYPE html>
       <div class="chips">__UNLIKE__</div>
     </div>
     <div class="foot">
-      <span>由 <span class="brand">ai-grader</span> 生成 · 注册老炮</span>
+      <span>由 <span class="brand">ai-grader</span> 生成 · SynomosAI</span>
       <span>性格拟人与主客相似度 · 第九视角</span>
     </div>
   </div>
@@ -2007,7 +2007,7 @@ body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Micr
   <div class="blk edge"><h5>🟡 在边缘试探的</h5><div class="chips" id="onedge"></div></div>
   <div class="blk bad"><h5>🚫 碰不得的禁区</h5><div class="chips" id="forb"></div></div>
 </div>
-<div class="foot"><span>由 <span class="brand">ai-grader</span> 生成 · 注册老炮</span>
+<div class="foot"><span>由 <span class="brand">ai-grader</span> 生成 · SynomosAI</span>
   <span>能力边界版图 · 比分数更看清「能做什么」</span></div>
 </div>
 <script>
@@ -2221,7 +2221,7 @@ ANCHORS = {
     "P14": {"L1": "潦草交付、错漏多", "L3": "基本一致、可交付", "L5": "精炼准确、经得起挑"},
     "P15": {"L1": "只抛问题", "L3": "问题+初步方案", "L5": "方案+取舍+建议路径"},
     "P16": {"L1": "反复空转、耗资源", "L3": "一次到位、少返工", "L5": "主动选最省路径、批处理"},
-    "P17": {"L1": "不计成本硬上", "L3": "有性价比意识", "L5": "主动算总账、选最优成本"},
+    "P17": {"L1": "不计成本硬上", "L3": "有性价比意识", "L5": "主动算总账、选较优成本"},
     "P18": {"L1": "拖沓无期限", "L3": "给明确时效预期", "L5": "紧迫分级、抢关键路径"},
     "P19": {"L1": "等指令", "L3": "该提醒的提醒", "L5": "前置看到风险/机会并提示"},
     "P20": {"L1": "跑题发散", "L3": "围绕目标作答", "L5": "砍掉噪音、直击要害"},
@@ -2471,6 +2471,10 @@ def main():
         render(db)
         print("看板已重渲染：", DASH, " 记录数：", len(db["records"]))
     elif cmd == "--reset":
+        if "--force" not in args:
+            print("[安全] --reset 会不可逆地清空全部测评记录并重置看板。")
+            print("        确认无误后请加 --force 再执行：python grade_stats.py --reset --force")
+            raise SystemExit(2)
         save({"records": []})
         render({"records": []})
         print("已清空 store 并重置看板")
@@ -2568,10 +2572,18 @@ def main():
         path = render_fit(info)
         print("已生成演示适配评估：", path, " 适配分：", info["fit"])
     elif cmd == "--persona":
+        # gated 子功能：人类画像涉及对 owner（人类）的人格维度刻画，默认关闭
+        if "--with-human-profiling" not in args:
+            print("[gated] --persona 是人类画像（性格拟人 / AI 与主人相似度）子功能，默认关闭。")
+            print("        它会对 owner（人类）做人格维度刻画，涉及个人数据。")
+            print("        若确需使用，请显式加 --with-human-profiling 并在知情前提下调用：")
+            print("        python grade_stats.py --persona '<json>' --with-human-profiling")
+            raise SystemExit(2)
         if len(args) < 2:
-            print("缺少 json，例如 --persona '{\"object\":\"AI-A\",\"owner\":\"Alex\",\"k\":{K1:4,...},\"h\":{H1:5,...}}'")
+            print("缺少 json，例如 --persona '{\"object\":\"AI-A\",\"owner\":\"Alex\",\"k\":{K1:4,...},\"h\":{H1:5,...}}' --with-human-profiling")
             return
         data = json.loads(args[1])
+        print("[隐私告知] 人类画像子功能将基于输入的人格维度刻画 owner，请确认已获当事人知情同意；本功能默认不启用。")
         info = persona_analyze(data.get("object", "未命名 AI"),
                                data.get("owner", "未命名主人"),
                                data.get("k") or {}, data.get("h") or {})
@@ -2580,6 +2592,9 @@ def main():
               " 拟人度：", info["human"], info["human_label"],
               " 相似度：", info["sim"], info["sim_label"])
     elif cmd == "--persona-seed":
+        if "--with-human-profiling" not in args:
+            print("[gated] --persona-seed 是人类画像演示，默认关闭。请加 --with-human-profiling 显式开启。")
+            raise SystemExit(2)
         demo_persona_seed()
     elif cmd == "--capability":
         if len(args) < 2:

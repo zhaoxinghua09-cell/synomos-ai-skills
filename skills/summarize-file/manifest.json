@@ -1,0 +1,9 @@
+{
+  "name": "文件速读",
+  "normalizedName": "summarize-file",
+  "description": "快速读取本地文件（TXT / MD / DOCX / PDF / HTML）并生成结构化摘要，用于回答「这个文件讲了什么」「几十页的文档能不能几句话说清」这类问题。摘要按真实参照法执行——每个要点挂回原文位置，原文没有的不写，不确定的标注而非补全。触发词：读文件、速读、文件总结、这个文件讲了什么、文件摘要、读一下这个 PDF、DOCX 摘要、长文速读、summarize file。本技能为通用方法论工具，非医疗器械 / 非医疗软件，无疗效或临床声明；详见包内免责声明。",
+  "author": "诺声(Logos)@SynomosAI",
+  "copyright": "SynomosAI",
+  "version": "1.0.0",
+  "license": "MIT"
+}

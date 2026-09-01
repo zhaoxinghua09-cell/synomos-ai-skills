@@ -30,7 +30,7 @@ OFFICIAL_DOMAINS = {
     "health.ec.europa.eu", "www.gov.cn",
 }
 SENSITIVE = [r"(?<!\d)1[3-9]\d{9}(?!\d)", r"[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}",
-             r"C:\\Users\\", r"<USER_HOME>", r"/Users/", r"/home/",
+             r"C:\\Users\\", r"C:/Users/", r"/Users/", r"/home/",
              r"sk-[A-Za-z0-9]{20,}", r"ghp_[A-Za-z0-9]{36,}"]
 SKIP_FILES = {"SKILL.md", "LICENSE.md", "ATTESTATION.md", "manifest.json"}
 SKIP_FILES_SENS = SKIP_FILES | {Path(__file__).name}

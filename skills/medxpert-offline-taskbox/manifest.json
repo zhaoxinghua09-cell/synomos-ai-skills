@@ -1,0 +1,32 @@
+{
+  "schema": "ownership-attestation/1.0",
+  "package": "MedXpert 跨机任务箱·低配省算力",
+  "version": "2.4.1",
+  "author": "注册老炮 (MedXpert)",
+  "year": "2026",
+  "timestamp_utc": "2026-08-27T13:54:59.626256+00:00",
+  "timestamp_local": "2026-08-27T21:54:59.626265",
+  "package_fingerprint_sha256": "54f7ebf92ef76928e1a95c23d12bbdc319f8d6ba20d165da8026e057dbc23123",
+  "files": [
+    {
+      "path": "LICENSE.md",
+      "sha256": "44c4963847703a6fe1aaa79784a45c11ce0cc04202480900c478c2f2ed112feb"
+    },
+    {
+      "path": "README.md",
+      "sha256": "c4471c39ac4d434d85416bc5c6e9d4c41ead0869198d6c87f726afc66bfefab2"
+    },
+    {
+      "path": "SKILL.md",
+      "sha256": "e942eb5cfaf368e6f82c817ecb85d0e640798ca7621f586a30d5d9ae62892667"
+    },
+    {
+      "path": "local_taskbox.py",
+      "sha256": "55daf6816742ac0694a268cf6505e228347ac9c04a1404d7fd30892703ea66f0"
+    },
+    {
+      "path": "offline_worker.py",
+      "sha256": "09c6711dcc8492c203e34f968a9472f1f41ecfa89129f607a5133d31a88c1e55"
+    }
+  ]
+}

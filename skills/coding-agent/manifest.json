@@ -1,0 +1,9 @@
+{
+  "name": "coding-agent",
+  "normalizedName": "coding-agent",
+  "description": "将编码工作委托给 Codex、Claude Code 或 OpenCode 作为后台工作进程执行，用于回答「大重构能不能丢给后台跑」「PR 能不能自动审」这类问题。适用大型重构、PR 审查、后台功能开发等长任务；派单、执行与回收全过程按证据链审计留痕，可还原\"哪个 agent、依据什么指令、改了什么\"。触发词：后台编码、大型重构、PR 审查、自动化 PR、后台开发、把编码丢出去跑、coding agent、delegate coding、background coding。本技能为通用方法论工具，非医疗器械 / 非医疗软件，无疗效或临床声明；详见包内免责声明。",
+  "author": "诺声(Logos)@SynomosAI",
+  "copyright": "SynomosAI",
+  "version": "1.0.0",
+  "license": "MIT"
+}

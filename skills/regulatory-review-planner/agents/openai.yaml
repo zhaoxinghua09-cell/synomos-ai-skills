@@ -1,0 +1,4 @@
+interface:
+  display_name: "制度合规审查"
+  short_description: "审查制度草稿的合规风险、修改建议与审查报告"
+  default_prompt: "使用 $regulatory-review-planner 审查这份制度草稿，并输出制度合规审查报告。"
