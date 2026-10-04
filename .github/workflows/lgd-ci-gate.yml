@@ -13,6 +13,8 @@ jobs:
   lgd-ci-gate:
     name: lgd-ci-gate
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     steps:
       - name: Merge gate (machine-enforced, single-account solo-mode A³)
         run: |
