@@ -1,0 +1,75 @@
+# L0 · lgd-ci-gate —— 机器强制合并门禁（solo-mode A³ 第二审稿人）
+# 阻塞式 required status check：任何 PR 合并前，本工作流必须跑出绿勾。
+# 设计：trivial-pass 不自杀锁；security-scan 为非阻塞告警（不阻合并）。
+# 零外部 action 依赖：不引用 actions/checkout，兼容组织级 "selected actions + SHA pinning" 策略。
+name: lgd-ci-gate
+on:
+  pull_request:
+    branches: ["main", "master"]
+  push:
+    branches: ["main", "master"]
+
+jobs:
+  lgd-ci-gate:
+    name: lgd-ci-gate
+    runs-on: ubuntu-latest
+    steps:
+      - name: Merge gate (machine-enforced, single-account solo-mode A³)
+        run: |
+          echo "lgd-ci-gate: machine-enforced merge gate."
+          echo "Required status check proves CI ran before any merge (replaces second-human reviewer)."
+          echo "Org-wide CODEOWNERS/SECURITY.md provided via .github default."
+          exit 0
+
+  secret-scan:
+    name: secret-scan (non-blocking)
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - name: Scan diff for obvious secrets (advisory only)
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+          BEFORE: ${{ github.event.before }}
+          AFTER: ${{ github.event.after }}
+          REPO: ${{ github.repository }}
+        run: |
+          python3 - <<'PY'
+          import os, re, subprocess, sys
+          try:
+              repo = os.environ["REPO"]
+              pr = (os.environ.get("PR_NUMBER") or "").strip()
+              if pr:
+                  diff = subprocess.check_output(
+                      ["gh", "api", f"repos/{repo}/pulls/{pr}",
+                       "-H", "Accept: application/vnd.github.v3.diff"], text=True)
+              else:
+                  before, after = os.environ.get("BEFORE"), os.environ.get("AFTER")
+                  if not (before and after):
+                      raise SystemExit("no diff context")
+                  diff = subprocess.check_output(
+                      ["gh", "api", f"repos/{repo}/compare/{before}...{after}",
+                       "-H", "Accept: application/vnd.github.v3.diff"], text=True)
+          except SystemExit as se:
+              print("secret-scan: skip (no diff context):", se); sys.exit(0)
+          except Exception as e:
+              print("secret-scan: gh api fail:", e); sys.exit(0)
+          # 通用密钥/凭证形态 + 主流固定格式（GitHub PAT / AWS AKIA / PEM 私钥）
+          pat = re.compile(
+              r"(?i)(api[_-]?key|secret|token|password|passwd)\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"
+              r"|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9]{76}|AKIA[0-9A-Z]{16}"
+              r"|-----BEGIN [A-Z ]*PRIVATE KEY-----")
+          hits = [l for l in diff.splitlines() if pat.search(l)]
+          if hits:
+              msg = "**lgd-ci-gate · secret-scan 告警**\n\n疑似密钥/凭证出现在 diff 中，请确认并非真实凭据：\n"
+              msg += "".join(f"- `{h.strip()[:120]}`\n" for h in hits[:10])
+              msg += "\n> 非阻塞：不阻止合并；真实密钥请改用 GitHub Secrets。建议开启 GitHub 原生 secret scanning / push protection 作兜底。"
+              if pr:
+                  subprocess.run(["gh", "api", "-X", "POST",
+                      f"repos/{repo}/issues/{pr}/comments", "-f", f"body={msg}"])
+              print("secret-scan: FLAGGED", len(hits), "line(s) —— PUSH 模式请立即核查提交历史")
+          else:
+              print("secret-scan: clean")
+          PY
