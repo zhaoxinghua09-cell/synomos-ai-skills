@@ -1,0 +1,92 @@
+# L1 · lgd-ai-review —— 通用 AI 审核机器人（BYOK · 非阻塞评论）
+# 每 PR 自动 AI 摘要 + 行内建议；评论 `/lgd-review` 触发重跑。
+# 零成本：GitHub Actions 免费额度 + OpenRouter 免费模型($0)。
+# 数据只发往你配的 LLM 端点（BYOK），不经过第三方审阅服务。
+# 零外部 action 依赖：不引用 actions/checkout，兼容组织级 "selected actions + SHA pinning" 策略。
+#
+# 部署前在仓 Settings → Secrets 加：
+#   LLM_API_KEY  LLM_BASE_URL  LLM_MODEL
+# （OpenRouter 免费：LLM_BASE_URL=https://openrouter.ai/api/v1  LLM_MODEL=openrouter/free）
+name: lgd-ai-review
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+  issue_comment:
+    types: [created]
+
+jobs:
+  ai-review:
+    if: >-
+      github.event_name == 'pull_request' ||
+      (github.event.issue.pull_request != '' &&
+       contains(github.event.comment.body, '/lgd-review'))
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    steps:
+      - name: LGD AI review (BYOK)
+        env:
+          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
+          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
+          LLM_MODEL: ${{ secrets.LLM_MODEL }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
+        run: |
+          python3 - <<'PY'
+          import os, json, urllib.request, subprocess, sys
+
+          REPO=os.environ["REPO"]; PR=(os.environ.get("PR_NUMBER") or "").strip()
+          TOK=os.environ["GH_TOKEN"]
+          KEY=os.environ["LLM_API_KEY"]; BASE=os.environ["LLM_BASE_URL"].rstrip("/"); MODEL=os.environ["LLM_MODEL"]
+
+          # 未配置 BYOK secrets → 显式告警，消除「绿勾=已审」假安全感（fail-open 不静默）
+          if not (KEY and BASE and MODEL):
+              msg=("**🤖 LGD 通用 AI 审核**\n\n"
+                   "⚠️ 未配置 LLM secrets（LLM_API_KEY / LLM_BASE_URL / LLM_MODEL），AI 审核未执行。"
+                   "本评论仅为提醒，不阻塞合并。配置后评论 `/lgd-review` 重跑。")
+              if PR:
+                  subprocess.run(["gh","api","-X","POST",f"repos/{REPO}/issues/{PR}/comments","-f",f"body={msg}"])
+              print("ai-review: BYOK not configured, skip"); sys.exit(0)
+
+          # 取 diff（不依赖 actions/checkout，直接用 gh api 取 diff）
+          try:
+              if PR:
+                  diff=subprocess.check_output(
+                      ["gh","api",f"repos/{REPO}/pulls/{PR}",
+                       "-H","Accept: application/vnd.github.v3.diff"],text=True)
+              else:
+                  before, after = os.environ.get("BEFORE"), os.environ.get("AFTER")
+                  diff=subprocess.check_output(
+                      ["gh","api",f"repos/{REPO}/compare/{before}...{after}",
+                       "-H","Accept: application/vnd.github.v3.diff"],text=True)
+          except Exception as e:
+              print("ai-review: diff fail", e); sys.exit(0)
+          diff=diff[:12000]  # 截断，控成本
+          if not diff.strip():
+              print("ai-review: empty diff"); sys.exit(0)
+
+          SYSTEM=("你是一名严谨的代码/文档审阅者。请基于以下 PR diff 给出中文审阅意见："
+                  "1) 逻辑缺陷或边界问题；2) 安全/密钥风险；3) 与 LGD 治理基线冲突项"
+                  "（不得出现内部流程注释、不得将品牌/DOI/pin 块搬入对外文件）；"
+                  "4) 可改进点（简洁）。无问题请明确说'未见明显问题'。控制在 300 字内，分条。")
+
+          body=json.dumps({"model":MODEL,"messages":[
+              {"role":"system","content":SYSTEM},
+              {"role":"user","content":"PR diff:\n"+diff}]})
+          req=urllib.request.Request(BASE+"/chat/completions", data=body.encode(),
+              headers={"Authorization":f"Bearer {KEY}","Content-Type":"application/json"})
+          try:
+              resp=json.load(urllib.request.urlopen(req, timeout=120))
+              review=resp["choices"][0]["message"]["content"]
+          except Exception as e:
+              print("ai-review: LLM call fail", e); sys.exit(0)
+
+          msg=f"**🤖 LGD 通用 AI 审核（建议性，非阻塞）**\n\n{review}\n\n"
+          msg+="---\n> 评论 `/lgd-review` 可重跑。本意见由机器人生成，合并决定仍由维护者拍板。"
+          if PR:
+              subprocess.run(["gh","api","-X","POST",
+                  f"repos/{REPO}/issues/{PR}/comments","-f",f"body={msg}"])
+          print("ai-review: posted")
+          PY
