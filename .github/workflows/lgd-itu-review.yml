@@ -98,10 +98,30 @@ jobs:
           # 🔴 路径豁免（v2.0 自查后加，防自我误报）：治理基础设施自身必然含品牌/规则关键词
           #    （改 lgd-itu-review.yml 的 PR，其 diff 里就写着 synomosai/medxpert/canonical…），
           #    若不豁免，改门禁的 PR 必然自我告警 → 告警噪音化 → 维护者脱敏。
-          #    故对 .github/workflows/ 与治理规则/文档类路径不判违规。
-          INFRA = (".github/workflows/", "itu-review-rules.md", "GOVERNED.md",
-                   "verify_l0.py", "fix_ruleset_l0.py", "deploy_full_governance.py",
-                   "deploy_nocheckout.py", "robot_review_redteam_tests.py")
+          #
+          # 🔴 v2.1 红队 F2 修复：旧版用裸子串 `x in cur_file`，导致 13 个路径逃逸
+          #    （.github/workflows/notes.md、GOVERNED.md.bak、docs/GOVERNED.md、xverify_l0.py…）。
+          #    现改为**精确判据**：① 工作流目录只豁免 .yml/.yaml（该目录本就该只有工作流）
+          #                     ② 其余按 basename 精确相等（先剥目录）
+          #                     ③ 目录名伪装（如 docs/.github/workflows/）不豁免（须以 / 开头）
+          import posixpath
+          def _exempt(path):
+              p = path.strip()
+              # ⚠️ v2.1 修：旧版用 lstrip("b/") 会按「字符集」剥前缀 → "docs/GOVERNED.md"
+              #    的开头 d 会被一起剥掉，误判为 GOVERNED.md 而错误豁免。
+              #    改为精确剥一次 "b/" 前缀（diff 头形如 +++ b/path）。
+              if p.startswith("b/"):
+                  p = p[2:]
+              if not p or p == "/dev/null":
+                  return False
+              # ① 工作流目录：只豁免真正的 .yml/.yaml
+              if p.startswith(".github/workflows/") and p.endswith((".yml", ".yaml")):
+                  return True
+              base = posixpath.basename(p)             # ② 其余按 basename 精确相等
+              return base in ("itu-review-rules.md", "GOVERNED.md",
+                              "verify_l0.py", "fix_ruleset_l0.py",
+                              "deploy_full_governance.py", "deploy_nocheckout.py",
+                              "robot_review_redteam_tests.py")
 
           hits = []
           cur_file = ""
@@ -112,17 +132,47 @@ jobs:
                   continue
               if not line.startswith("+"):
                   continue
-              if any(x in cur_file for x in INFRA):
+              if _exempt(cur_file):
                   continue
               for label, pat in RULES:
                   if re.search(pat, line, re.I):
                       hits.append((label, line.strip()[:140]))
                       break
 
+          # ── 自测变异（who-tests-the-tester）· v2.1 ──
+          # 🔴 红队 F1 修复：旧版自检写在「if not hits: sys.exit(0)」之后 ⇒ clean 路径（常见情况）
+          #    永远跑不到自检；且即使跑到也只 print(..., file=stderr)，脚本正常退出 → job 仍绿
+          #    ⇒ 规则可被静默阉割、零可见告警。
+          #    现改为：**在 clean 分支之前**执行，且失败 **sys.exit(1)** 让 job 真的红。
+          #    仍保持非阻塞（不作为 required check），但"自己坏了"必须可见。
+          import re as _re
+          samples = [
+              ("<!-- 内部草稿 -->", RULES[0][1]), ("<!-- internal -->", RULES[0][1]),
+              ("<!-- draft -->", RULES[0][1]),
+              ("须过 A3 机器闸", RULES[0][1]), ("专家终审", RULES[0][1]),
+              ("SynomosAI 品牌块", RULES[1][1]), ("MedXpert", RULES[1][1]),
+              ("synomos-ai", RULES[1][1]),
+              ("All rights reserved", RULES[2][1]), ("版权所有 赵兴华", RULES[2][1]),
+              ("© 2026", RULES[2][1]),
+              ("doi.org/10.5281/zenodo.1234", RULES[3][1]),
+              ("10.5281/zenodo.999", RULES[3][1]), ("canonical: https://x", RULES[3][1]),
+              ("ORCID 0000-0001-2345-6789", RULES[4][1]),
+          ]
+          broken = [s for s, p in samples if not _re.search(p, s, _re.I)]
+          if broken:
+              print(f"discipline: SELF-TEST FAILED ({len(broken)}/{len(samples)} 样本未命中): {broken}",
+                    file=sys.stderr)
+              post("**🚨 LGD 递交纪律检查 · 自检失败**\n\n"
+                   f"规则库已被改坏：{len(broken)}/{len(samples)} 个已知违规样本未被命中。\n\n"
+                   f"未命中样本：\n" + "".join(f"- `{b}`\n" for b in broken) +
+                   "\n> 本次检查结果**不可信**，请人工复核。规则维护请联系 ITU 专家。")
+              sys.exit(1)   # 🔴 让 job 真的红 —— 自己坏了必须可见
+          print(f"discipline: self-test OK ({len(samples)}/{len(samples)})")
+
           if not hits:
               post("**📋 LGD 递交纪律检查**\n\n"
                    "✅ 未发现内部流程注释 / 品牌块 / 权利宣告 / DOI-pin / ORCID。\n\n"
-                   "<sub>纯规则检查（零 LLM、零密钥），`/itu-review` 可重跑。</sub>")
+                   f"<sub>纯规则检查（零 LLM、零密钥），规则自检 {len(samples)}/{len(samples)} 通过；`/itu-review` 可重跑。</sub>")
               print("discipline: clean"); sys.exit(0)
 
           body = ("**📋 LGD 递交纪律检查** — ⚠️ 命中 "
@@ -134,26 +184,9 @@ jobs:
           if len(hits) > 15:
               body += f"\n<sub>（另有 {len(hits)-15} 行未列出）</sub>\n"
           body += ("\n---\n> 纯规则检查（零 LLM、零密钥），非阻塞不拦合并；"
-                   "但对外递交前**必须**人工清除。`/itu-review` 可重跑。")
+                   f"规则自检 {len(samples)}/{len(samples)} 通过。`/itu-review` 可重跑。")
           post(body)
           print(f"discipline: FLAGGED {len(hits)} line(s)")
-
-          # ── 自测变异（who-tests-the-tester）：确保规则本身仍能命中已知样本 ──
-          # 若下列断言失败，说明规则被改坏 → 打 stderr 供 Actions 日志可见（仍不阻塞）
-          import re as _re
-          samples = [
-              ("<!-- 内部草稿 -->", RULES[0][1]), ("<!-- internal -->", RULES[0][1]),
-              ("须过 A3 机器闸",   RULES[0][1]),
-              ("SynomosAI 品牌块", RULES[1][1]), ("MedXpert", RULES[1][1]),
-              ("All rights reserved", RULES[2][1]), ("版权所有 赵兴华", RULES[2][1]),
-              ("doi.org/10.5281/zenodo.1234", RULES[3][1]),
-              ("ORCID 0000-0001-2345-6789", RULES[4][1]),
-          ]
-          broken = [s for s, p in samples if not _re.search(p, s, _re.I)]
-          if broken:
-              print("discipline: ⚠️ 自检失败，规则被改坏，未命中样本:", broken, file=sys.stderr)
-          else:
-              print(f"discipline: self-test OK ({len(samples)}/{len(samples)})")
           PY
 
   # ─────────────────────────────────────────────────────────────
