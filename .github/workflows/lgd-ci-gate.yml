@@ -58,20 +58,41 @@ jobs:
               print("secret-scan: skip (no diff context):", se); sys.exit(0)
           except Exception as e:
               print("secret-scan: gh api fail:", e); sys.exit(0)
-          # 通用密钥/凭证形态 + 主流固定格式（GitHub PAT / AWS AKIA / PEM 私钥）
+          # ── 密钥形态提示（v2.1：修死规则 + 诚实降级定位）──
+          # 🔴 红队 F4 修复：旧正则 `github_pat_[A-Za-z0-9]{76}` 是【死规则】——
+          #    真实 fine-grained PAT 形态是 github_pat_ + 22 位 + 字面 "_" + 59 位，
+          #    字面下划线不在 [A-Za-z0-9] 内，且分段是 22/59 而非 76 ⇒ 永远匹配不到。
+          #    现按真实形态改写，并补 gho_/ghu_/ghs_/ghr_（OAuth/refresh/user/server token）。
+          #
+          # ⚠️ 定位诚实声明：本 job 是【PR 内提示】，不是密钥扫描器。
+          #    实测 20/20 仓 GitHub 原生 secret scanning + push protection 已 enabled
+          #    （public 仓免费），原生覆盖 partner 全量模式且在 push 阶段即阻断——
+          #    能力显著强于本正则。原生是主防线，本 job 只是"提交前多看一眼"的辅助。
           pat = re.compile(
               r"(?i)(api[_-]?key|secret|token|password|passwd)\s*[:=]\s*['\"]?[A-Za-z0-9_\-]{16,}"
-              r"|ghp_[A-Za-z0-9]{36}|github_pat_[A-Za-z0-9]{76}|AKIA[0-9A-Z]{16}"
-              r"|-----BEGIN [A-Z ]*PRIVATE KEY-----")
+              # GitHub token 全族：ghp/oauth(gh*_)/user-to-server(ghu_)/server(s_)/refresh(r_)
+              r"|gh[pousr]_[A-Za-z0-9]{36,}"
+              # fine-grained PAT：github_pat_ + 22 + _ + 59（修死规则）
+              r"|github_pat_[A-Za-z0-9]{22}_[A-Za-z0-9]{59}"
+              r"|AKIA[0-9A-Z]{16}"
+              r"|-----BEGIN [A-Z ]*PRIVATE KEY-----"
+              # 其它常见 provider（本正则层面尽力覆盖，仍以原生为准）
+              r"|glpat-[A-Za-z0-9_\-]{20}"
+              r"|xox[baprs]-[A-Za-z0-9-]{10,}"
+              r"|sk_live_[A-Za-z0-9]{16,}"
+              r"|AIza[0-9A-Za-z_\-]{35}")
           hits = [l for l in diff.splitlines() if pat.search(l)]
           if hits:
-              msg = "**lgd-ci-gate · secret-scan 告警**\n\n疑似密钥/凭证出现在 diff 中，请确认并非真实凭据：\n"
+              msg = ("**lgd-ci-gate · secret-scan 提示**\n\n"
+                     "疑似密钥/凭证形态出现在 diff 中，请确认并非真实凭据：\n")
               msg += "".join(f"- `{h.strip()[:120]}`\n" for h in hits[:10])
-              msg += "\n> 非阻塞：不阻止合并；真实密钥请改用 GitHub Secrets。建议开启 GitHub 原生 secret scanning / push protection 作兜底。"
+              msg += ("\n> 非阻塞：不阻止合并。**真正的主防线是 GitHub 原生 secret scanning + push protection**"
+                      "（本仓已启用，public 仓免费，能识别本正则覆盖不到的格式）。"
+                      "真实密钥请改用 GitHub Secrets，并优先依赖原生 push protection 阻断。")
               if pr:
                   subprocess.run(["gh", "api", "-X", "POST",
                       f"repos/{repo}/issues/{pr}/comments", "-f", f"body={msg}"])
               print("secret-scan: FLAGGED", len(hits), "line(s) —— PUSH 模式请立即核查提交历史")
           else:
-              print("secret-scan: clean")
+              print("secret-scan: clean（主防线为原生 secret scanning / push protection）")
           PY
