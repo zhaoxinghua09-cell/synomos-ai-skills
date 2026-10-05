@@ -1,7 +1,17 @@
-# L2 · lgd-itu-review —— ITU 专项审核机器人（BYOK · 非阻塞评论）
-# 仅对 ITU 相关仓/PR 生效：仓名含 'itu' 或仓根存在标记文件 `.lgd-itu`。
+# L2 · lgd-itu-review —— 标准/ITU 递交纪律 + 专项审核（建议性，非阻塞）
+# 覆盖理论/LGD/标准/治理族（D7 精准扩面，激活条件见 GOVERNED.md 单一真源）。
 # ITU 专家（standards-participation-officer）负责维护本仓的 itu-review-rules.md。
-# 顺带自动执行「递交纪律」硬检查：拦截内部流程注释 / 品牌块 / DOI-pin 搬入对外贡献。
+#
+# 🔴 v2.0 关键改造（2026-10-05 · Steven「按你建议」授权后）
+#   问题：旧版把「递交纪律硬检查」与「LLM 调用」捆在同一个 job 的同一段代码里，
+#        且开头就 `if not (KEY and BASE and MODEL): post(warning); exit(0)` 短路——
+#        导致未配 BYOK 密钥时，**递交纪律硬检查（零品牌/零 DOI-pin/零内部注释）整块永不执行**，
+#        形同虚设（全机禁令在 GitHub 侧无任何机器执行）。
+#   改造：拆成两个独立 job——
+#     job1 discipline-check：**纯 python 正则、零 LLM、零密钥**，永远执行，命中即发告警评论。
+#     job2 itu-llm-review：仅在配了 BYOK 密钥时才跑，负责 ITU 术语/引用格式等「AI 才该干」的活。
+#   ⇒ 核心禁令执行不再依赖任何密钥 / 网络 / 付费服务。
+#
 # 零外部 action 依赖：不引用 actions/checkout，兼容组织级 "selected actions + SHA pinning" 策略。
 name: lgd-itu-review
 on:
@@ -11,57 +21,179 @@ on:
     types: [created]
 
 jobs:
-  itu-review:
+  # ─────────────────────────────────────────────────────────────
+  # job1 · 递交纪律硬检查（纯规则 · 无需密钥 · 永远执行）
+  # ─────────────────────────────────────────────────────────────
+  discipline-check:
+    name: lgd-itu-discipline
     if: >-
-      (contains(github.repository, 'itu') ||
-       github.event_name == 'pull_request') &&
-      (github.event_name == 'pull_request' ||
-       (github.event.issue.pull_request != '' &&
-        contains(github.event.comment.body, '/itu-review')))
+      github.event_name == 'pull_request' ||
+      (github.event.issue.pull_request != '' &&
+       contains(github.event.comment.body, '/itu-review'))
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
       contents: read
     steps:
-      - name: Check ITU scope (skip if not standards-submission-relevant)
+      - name: Check scope (skip if not standards-submission-relevant)
         id: scope
         env:
           REPO: ${{ github.repository }}
         run: |
-          # 激活范围（D7 精准扩面）：理论/LGD/标准/治理族自动触发递交纪律硬检查。
-          # 与 deploy_full_governance.py 的 GOVERNED 关键字保持一致（单一真源：robot-review/GOVERNED.md）。
-          if printf '%s' "$REPO" | grep -qiE "itu|lgd|theory|standards|governance|gov-|passport|trust-identity|ai-gov|synomos-ai-skills|agent-trust|nomos-ai|didaskalos|krites|logos-ambassador|fingerprint|provenance|credential-vault|authz-code|identity-verify|sec2-provenance|culpachain|assurability|assayance|terminance|runtigil|premise-and-config-audit|research-quality-gate|publish-quality-gate|continuous-test-review-loop|ai-grader|code-review-standard|traceability-audit-team|audit-trail-keeper"; then
+          # 激活范围（D7 精准扩面）：与 GOVERNED.md / deploy_full_governance.py 关键字保持一致。
+          if printf '%s' "$REPO" | grep -qiE "itu|lgd|theory|standards|governance|gov-|passport|trust-identity|ai-gov|synomos-?ai|agent-trust|nomos-ai|didaskalos|krites|logos-ambassador|fingerprint|provenance|credential-vault|authz-code|identity-verify|sec2-provenance|culpachain|assurability|assayance|terminance|runtigil|premise-and-config-audit|research-quality-gate|publish-quality-gate|continuous-test-review-loop|ai-grader|code-review-standard|traceability-audit-team|audit-trail-keeper"; then
             echo "itu=1" >> "$GITHUB_OUTPUT"; exit 0
           fi
           if gh api "repos/$REPO/contents/.lgd-itu" >/dev/null 2>&1; then echo "itu=1" >> "$GITHUB_OUTPUT"; exit 0; fi
           echo "itu=0" >> "$GITHUB_OUTPUT"
-      - name: LGD ITU review (BYOK)
+
+      - name: Submission-discipline hard check (pure regex, no LLM, no secrets)
         if: steps.scope.outputs.itu == '1'
         env:
-          LLM_API_KEY: ${{ secrets.LLM_API_KEY }}
-          LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
-          LLM_MODEL: ${{ secrets.LLM_MODEL }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           PR_NUMBER: ${{ github.event.pull_request.number || github.event.issue.number }}
         run: |
           python3 - <<'PY'
-          import os, re, json, urllib.request, subprocess, sys, base64
+          import os, re, subprocess, sys
+
+          REPO = os.environ["REPO"]
+          PR   = (os.environ.get("PR_NUMBER") or "").strip()
+
+          def post(body):
+              if PR:
+                  subprocess.run(["gh","api","-X","POST",
+                      f"repos/{REPO}/issues/{PR}/comments","-f",f"body={body}"])
+
+          # 取 diff（不依赖 actions/checkout）
+          try:
+              if PR:
+                  diff = subprocess.check_output(
+                      ["gh","api",f"repos/{REPO}/pulls/{PR}",
+                       "-H","Accept: application/vnd.github.v3.diff"], text=True)
+              else:
+                  before, after = os.environ.get("BEFORE"), os.environ.get("AFTER")
+                  diff = subprocess.check_output(
+                      ["gh","api",f"repos/{REPO}/compare/{before}...{after}",
+                       "-H","Accept: application/vnd.github.v3.diff"], text=True)
+          except Exception as e:
+              print("discipline: diff fetch fail:", e); sys.exit(0)
+
+          # ── 递交纪律规则集（纯正则，无需 LLM；由 ITU 专家维护，与 itu-review-rules.md §3 对齐）──
+          RULES = [
+              ("内部流程注释",
+               r"<!--\s*(内部|草稿|draft|internal|todo|讨论)|须过.{0,6}机器闸|专家终审"),
+              ("品牌块（对外贡献禁带）",
+               r"synomosai|medxpert|synomos-?ai"),
+              ("权利宣告块（对外贡献禁带）",
+               r"copyright|all rights reserved|版权所有|权利声明|©"),
+              ("出版物锚 / DOI-pin",
+               r"canonical[_\s:=]?|10\.5281/zenodo|doi\.org/10\.5281|zenodo\s*doi"),
+              ("身份信号 ORCID",
+               r"orcid|0000-\d{4}-\d{4}-\d{3}[\dX]"),
+          ]
+
+          # 只扫「新增行」（diff 以 + 开头），避免把既有代码/规则文档本身报成违规
+          #
+          # 🔴 路径豁免（v2.0 自查后加，防自我误报）：治理基础设施自身必然含品牌/规则关键词
+          #    （改 lgd-itu-review.yml 的 PR，其 diff 里就写着 synomosai/medxpert/canonical…），
+          #    若不豁免，改门禁的 PR 必然自我告警 → 告警噪音化 → 维护者脱敏。
+          #    故对 .github/workflows/ 与治理规则/文档类路径不判违规。
+          INFRA = (".github/workflows/", "itu-review-rules.md", "GOVERNED.md",
+                   "verify_l0.py", "fix_ruleset_l0.py", "deploy_full_governance.py",
+                   "deploy_nocheckout.py", "robot_review_redteam_tests.py")
+
+          hits = []
+          cur_file = ""
+          for line in diff.splitlines():
+              # 追踪当前 diff 所属文件（diff 头形如: +++ b/path/to/file）
+              if line.startswith("+++ "):
+                  cur_file = line[4:].strip()
+                  continue
+              if not line.startswith("+"):
+                  continue
+              if any(x in cur_file for x in INFRA):
+                  continue
+              for label, pat in RULES:
+                  if re.search(pat, line, re.I):
+                      hits.append((label, line.strip()[:140]))
+                      break
+
+          if not hits:
+              post("**📋 LGD 递交纪律检查**\n\n"
+                   "✅ 未发现内部流程注释 / 品牌块 / 权利宣告 / DOI-pin / ORCID。\n\n"
+                   "<sub>纯规则检查（零 LLM、零密钥），`/itu-review` 可重跑。</sub>")
+              print("discipline: clean"); sys.exit(0)
+
+          body = ("**📋 LGD 递交纪律检查** — ⚠️ 命中 "
+                  f"{len(hits)} 行疑似「不得出门」内容\n\n"
+                  "按 2026-10-02 全机禁令（第三方流程仓递交＝议题 ≠ 投稿）：\n"
+                  "**零品牌、零 DOI/pin、零内部流程注释**。以下须清除后再递交：\n\n")
+          for label, text in hits[:15]:
+              body += f"- **{label}** — `{text}`\n"
+          if len(hits) > 15:
+              body += f"\n<sub>（另有 {len(hits)-15} 行未列出）</sub>\n"
+          body += ("\n---\n> 纯规则检查（零 LLM、零密钥），非阻塞不拦合并；"
+                   "但对外递交前**必须**人工清除。`/itu-review` 可重跑。")
+          post(body)
+          print(f"discipline: FLAGGED {len(hits)} line(s)")
+
+          # ── 自测变异（who-tests-the-tester）：确保规则本身仍能命中已知样本 ──
+          # 若下列断言失败，说明规则被改坏 → 打 stderr 供 Actions 日志可见（仍不阻塞）
+          import re as _re
+          samples = [
+              ("<!-- 内部草稿 -->", RULES[0][1]), ("<!-- internal -->", RULES[0][1]),
+              ("须过 A3 机器闸",   RULES[0][1]),
+              ("SynomosAI 品牌块", RULES[1][1]), ("MedXpert", RULES[1][1]),
+              ("All rights reserved", RULES[2][1]), ("版权所有 赵兴华", RULES[2][1]),
+              ("doi.org/10.5281/zenodo.1234", RULES[3][1]),
+              ("ORCID 0000-0001-2345-6789", RULES[4][1]),
+          ]
+          broken = [s for s, p in samples if not _re.search(p, s, _re.I)]
+          if broken:
+              print("discipline: ⚠️ 自检失败，规则被改坏，未命中样本:", broken, file=sys.stderr)
+          else:
+              print(f"discipline: self-test OK ({len(samples)}/{len(samples)})")
+          PY
+
+  # ─────────────────────────────────────────────────────────────
+  # job2 · ITU 专项 AI 审阅（仅在配了 BYOK 密钥时运行 · 建议性）
+  # ─────────────────────────────────────────────────────────────
+  itu-llm-review:
+    if: >-
+      github.event_name == 'pull_request' ||
+      (github.event.issue.pull_request != '' &&
+       contains(github.event.comment.body, '/itu-review'))
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    env:
+      LLM_API_KEY:  ${{ secrets.LLM_API_KEY }}
+      LLM_BASE_URL: ${{ secrets.LLM_BASE_URL }}
+      LLM_MODEL:    ${{ secrets.LLM_MODEL }}
+      GH_TOKEN:     ${{ secrets.GITHUB_TOKEN }}
+      REPO:         ${{ github.repository }}
+      PR_NUMBER:    ${{ github.event.pull_request.number || github.event.issue.number }}
+    steps:
+      - name: Skip if BYOK not configured (fail-open, 不静默)
+        id: byok
+        run: |
+          if [ -n "$LLM_API_KEY" ] && [ -n "$LLM_BASE_URL" ] && [ -n "$LLM_MODEL" ]; then
+            echo "ready=1" >> "$GITHUB_OUTPUT"
+          else
+            echo "ready=0" >> "$GITHUB_OUTPUT"
+          fi
+      - name: ITU specialist review (BYOK)
+        if: steps.byok.outputs.ready == '1'
+        run: |
+          python3 - <<'PY'
+          import os, re, json, base64, urllib.request, subprocess, sys
 
           REPO=os.environ["REPO"]; PR=(os.environ.get("PR_NUMBER") or "").strip()
-          TOK=os.environ["GH_TOKEN"]
           KEY=os.environ["LLM_API_KEY"]; BASE=os.environ["LLM_BASE_URL"].rstrip("/"); MODEL=os.environ["LLM_MODEL"]
 
-          # 未配置 BYOK secrets → 显式告警，消除「绿勾=已审」假安全感（fail-open 不静默）
-          if not (KEY and BASE and MODEL):
-              msg=("**📡 LGD ITU 专项审核**\n\n"
-                   "⚠️ 未配置 LLM secrets（LLM_API_KEY / LLM_BASE_URL / LLM_MODEL），AI 审核未执行。"
-                   "本评论仅为提醒，不阻塞合并。配置后评论 `/itu-review` 重跑。")
-              if PR:
-                  subprocess.run(["gh","api","-X","POST",f"repos/{REPO}/issues/{PR}/comments","-f",f"body={msg}"])
-              print("itu-review: BYOK not configured, skip"); sys.exit(0)
-
-          # ITU 规则集（ITU 专家维护）—— 不依赖 checkout，经 API 取文件内容
+          # ITU 规则集（ITU 专家维护）—— 经 API 取文件内容，不依赖 checkout
           rules = "(规则集缺失，请 ITU 专家补 itu-review-rules.md)"
           try:
               b64 = subprocess.check_output(
@@ -71,7 +203,6 @@ jobs:
           except Exception:
               pass
 
-          # 取 diff（不依赖 actions/checkout，直接用 gh api 取 diff）
           try:
               if PR:
                   diff=subprocess.check_output(
@@ -83,23 +214,7 @@ jobs:
                       ["gh","api",f"repos/{REPO}/compare/{before}...{after}",
                        "-H","Accept: application/vnd.github.v3.diff"],text=True)
           except Exception as e:
-              print("itu-review: diff fail", e); sys.exit(0)
-
-          # 递交纪律硬检查：内部流程注释 / 品牌块 / 权利宣告 / ORCID / DOI-pin / Zenodo
-          hard = re.compile(
-              r"(?i)(<!--\s*(内部|草稿|draft|internal|todo|讨论)"
-              r"|须过.{0,6}机器闸|专家终审"
-              r"|canonical[_\s:=]?"
-              r"|10\.5281/zenodo|doi\.org/10\.5281|zenodo\s*doi"
-              r"|orcid|0000-\d{4}-\d{4}-\d{3}[\dX]"
-              r"|copyright|all rights reserved|版权所有|权利声明|©"
-              r"|synomosai|medxpert)", re.M)
-          violations = [l for l in diff.splitlines() if hard.search(l)]
-          discipline_note = ""
-          if violations:
-              discipline_note = ("\n\n⚠️ **递交纪律告警（全机禁令自动执行）**：检测到疑似内部流程注释 / 品牌块 / DOI-pin 出现在对外贡献 diff 中，"
-                                "按 2026-10-02 禁令须清除后再递交第三方流程仓：\n" +
-                                "".join(f"- `{v.strip()[:120]}`\n" for v in violations[:10]))
+              print("itu-llm: diff fail", e); sys.exit(0)
 
           diff=diff[:10000]
           SYSTEM=(f"你是 ITU 标准参编专项审阅者（ITU 专家负责）。请基于 PR diff 与以下 ITU 规则集，"
@@ -115,12 +230,13 @@ jobs:
               resp=json.load(urllib.request.urlopen(req, timeout=120))
               review=resp["choices"][0]["message"]["content"]
           except Exception as e:
-              print("itu-review: LLM fail", e); sys.exit(0)
+              print("itu-llm: LLM call fail", e); sys.exit(0)
 
-          msg=f"**📡 LGD ITU 专项审核（ITU 专家规则 · 建议性，非阻塞）**\n\n{review}{discipline_note}\n\n"
-          msg+="---\n> 评论 `/itu-review` 重跑。规则集由 ITU 专家维护；对外件最终仍须 Steven 亲手/批准。"
+          msg=(f"**📡 LGD ITU 专项 AI 审阅（ITU 专家规则 · 建议性，非阻塞）**\n\n{review}\n\n"
+               "---\n> 本条由 LLM 生成，仅供参考。递交纪律硬检查见上方 `lgd-itu-discipline`（纯规则）。"
+               "对外件最终仍须 Steven 亲手/批准。")
           if PR:
               subprocess.run(["gh","api","-X","POST",
                   f"repos/{REPO}/issues/{PR}/comments","-f",f"body={msg}"])
-          print("itu-review: posted")
+          print("itu-llm: posted")
           PY
