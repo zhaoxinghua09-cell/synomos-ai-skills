@@ -8,7 +8,7 @@
   不得复制、改编、再分发、公开传播或用于衍生作品。
 - **可否引用**：可以。允许在**注明出处**的前提下引用与学术、公共讨论；
   引用时请同时标注仓库名、原文链接 `https://github.com/zhaoxinghua09-cell/synomos-ai-skills`
-  与权利人「赵兴华 / Steven Zhao·China」。
+  与权利人：© 2026 赵兴华 / Steven Zhao (ORCID 0009-0001-0512-1237). All rights reserved.
 - **完整条款**：见仓库根目录 [LICENSE](LICENSE)。
 - **联系**：zhaoxinghua06@126.com ｜ ORCID 0009-0001-0512-1237
 - **品牌状态限定**：MedXpert、SynomosAI、LGD 等为相关项目标识，
@@ -83,4 +83,8 @@
 - **SkillHub / SkillPie**：平台内搜索 slug
 - **GitHub 镜像**：克隆本仓，`skills/<slug>/` 即独立可用 skill
 
-> 版权归属见各 skill 的 `SKILL.md` frontmatter（医疗器械类 © MedXpert，AI 类 © SynomosAI）。
+> © 2026 赵兴华 / Steven Zhao (ORCID 0009-0001-0512-1237). All rights reserved.
+> 理论署名 (attribution) : LGD（Lifecycle Governance Doctrine / 全程治理论）— SynomosAI initiative
+> 名称状态 (name status)  : "SynomosAI" / "MedXpert" — 未申请实体注册、未申请商标注册
+>                         (not a registered legal entity; no trademark registered)
+> 各 skill 具体条款以其 `SKILL.md` frontmatter 与根目录 LICENSE 为准。
