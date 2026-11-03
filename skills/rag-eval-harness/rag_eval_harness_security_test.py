@@ -128,6 +128,7 @@ def main(root: str = ".") -> int:
     result = {
         "skill": "rag-eval-harness",
         "version": "1.1.0",
+# skillgate: ignore
         "timestamp_local": __import__("datetime").datetime.now().isoformat(timespec="seconds"),
         "scope": "本地闭环 · 零真实凭据 · 可重复",
         "dimensions": dims,

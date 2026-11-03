@@ -6,3 +6,5 @@ __pycache__/
 .env
 node_modules/
 *.zip
+# SkillGate runtime artifacts (local audit trail)
+.skillgate-audit.jsonl
