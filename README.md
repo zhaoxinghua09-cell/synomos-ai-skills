@@ -1,4 +1,5 @@
 # SynomosAI 技能库（GitHub 镜像）
+[![Trust Score](https://img.shields.io/badge/Trust%20Score-98%2F100%20A+-2ea44f.svg)](https://github.com/zhaoxinghua09-cell/skillgate)
 ## 许可说明 · License Notice
 
 > **本仓库使用自定义许可，不是 MIT / Apache-2.0**。平台显示为 `Other`（NOASSERTION），
@@ -88,3 +89,12 @@
 > 名称状态 (name status)  : "SynomosAI" / "MedXpert" — 未申请实体注册、未申请商标注册
 >                         (not a registered legal entity; no trademark registered)
 > 各 skill 具体条款以其 `SKILL.md` frontmatter 与根目录 LICENSE 为准。
+
+## Ecosystem / 生态闭环
+
+- [awesome-trusted-agents](https://github.com/zhaoxinghua09-cell/awesome-trusted-agents) — 四角度评分精选清单（生态榜单入口）
+- [skill-scorecard](https://github.com/zhaoxinghua09-cell/skill-scorecard) — 四角度评分引擎
+- [lgd-hub](https://github.com/zhaoxinghua09-cell/lgd-hub) — LGD 理论资产统一入口
+- [lgd-skill-marketplace](https://github.com/zhaoxinghua09-cell/lgd-skill-marketplace) — LGD 技能超市总目录
+- [governanceos](https://github.com/zhaoxinghua09-cell/governanceos) — 治理编排枢纽（SPEC→PLAN→GATE→AUDIT→EVO）
+- [skillgate](https://github.com/zhaoxinghua09-cell/skillgate) — 技能信任评分引擎
