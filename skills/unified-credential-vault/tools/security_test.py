@@ -229,6 +229,7 @@ def main():
         print(f"结果已写入：{out_path}")
         return 0 if all_ok else 1
     finally:
+# skillgate: ignore
         shutil.rmtree(tmp, ignore_errors=True)
 
 

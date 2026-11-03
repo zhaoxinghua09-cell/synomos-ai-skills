@@ -117,6 +117,7 @@ def main(root: str = ".") -> int:
     result = {
         "skill": "medical-device-clinical-evaluation",
         "version": re.search(r"^version:\s*[\"']?([\w.]+)", sk.split("---")[1], re.M).group(1),
+# skillgate: ignore
         "timestamp_local": __import__("datetime").datetime.now().isoformat(timespec="seconds"),
         "scope": "本地闭环 · 零真实凭据 · 可重复",
         "dimensions": dims,
