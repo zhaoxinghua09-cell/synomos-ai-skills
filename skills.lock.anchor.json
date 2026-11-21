@@ -1,6 +1,6 @@
 {
-  "root_digest": "0fcd93b2263b6c060a5755b1f3b84e5e6f79245ad96c5005e6eedd2dce13d16f",
+  "root_digest": "44f40989c68b32c1096bebcaeac10e922f3186637314d7ed2136055d76dff7c8",
   "schema_version": 1,
-  "sequence": 3,
-  "skill_count": 32
+  "sequence": 4,
+  "skill_count": 31
 }

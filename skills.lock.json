@@ -12,20 +12,17 @@
     {
       "root_digest": "0fcd93b2263b6c060a5755b1f3b84e5e6f79245ad96c5005e6eedd2dce13d16f",
       "sequence": 3
+    },
+    {
+      "root_digest": "44f40989c68b32c1096bebcaeac10e922f3186637314d7ed2136055d76dff7c8",
+      "sequence": 4
     }
   ],
-  "root_digest": "0fcd93b2263b6c060a5755b1f3b84e5e6f79245ad96c5005e6eedd2dce13d16f",
+  "root_digest": "44f40989c68b32c1096bebcaeac10e922f3186637314d7ed2136055d76dff7c8",
   "schema_version": 2,
-  "sequence": 3,
-  "skill_count": 32,
+  "sequence": 4,
+  "skill_count": 31,
   "skills": [
-    {
-      "declared_name": "synomosai-skills",
-      "digest": "be43afb0e07d9d08b59d4ee4a12205577d70fb19786b57c1e6b26d250d7fa543",
-      "file_count": 392,
-      "has_description": true,
-      "path": "."
-    },
     {
       "declared_name": "a3-law-operational",
       "digest": "76bb5e47dd28f838e4b77ee7836218c1355188776d2312472bf6ba70c21c644c",
