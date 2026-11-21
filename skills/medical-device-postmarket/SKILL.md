@@ -70,6 +70,7 @@ trigger_keywords:
 - medical
 - device
 - postmarket
+capabilities: [read]
 ---
 
 

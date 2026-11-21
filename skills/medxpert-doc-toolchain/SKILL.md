@@ -55,6 +55,7 @@ trigger_keywords:
 - medxpert
 - doc
 - toolchain
+capabilities: [read]
 ---
 
 

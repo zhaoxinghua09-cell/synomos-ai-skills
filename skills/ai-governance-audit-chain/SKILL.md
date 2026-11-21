@@ -21,6 +21,7 @@ tags:
   - 审计
   - ISO42001
 ambassador: phylax
+capabilities: [read]
 ---
 
 # 可审计证据链模板 (ai-governance-audit-chain)

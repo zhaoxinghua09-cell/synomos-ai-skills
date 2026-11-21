@@ -72,6 +72,7 @@ trigger_keywords:
 - device
 - risk
 - management
+capabilities: [read]
 ---
 
 

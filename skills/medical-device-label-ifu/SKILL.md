@@ -73,6 +73,7 @@ trigger_keywords:
 - device
 - label
 - ifu
+capabilities: [read]
 ---
 
 

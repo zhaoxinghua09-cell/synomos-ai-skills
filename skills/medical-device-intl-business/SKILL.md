@@ -22,6 +22,7 @@ xiaping_tags: ["医疗器械","国际业务","出海","国际市场","市场准�
 agent_created: true
 verified_links: "2026-08-24 联网查证：IMDRF 管理委员会成员（含中/美/欧/日/澳/加/巴/韩/新加坡/英/瑞士/俄，WHO 为官方观察员）与 MDSAP 五国（澳TGA/巴ANVISA/加HC/日MHLW-PMDA/美FDA）已按 imdrf.org、mdsap.global、fda.gov 最新状态核对"
 ambassador: iatros
+capabilities: [read]
 ---
 
 # 医疗器械国际业务·出海经营军师

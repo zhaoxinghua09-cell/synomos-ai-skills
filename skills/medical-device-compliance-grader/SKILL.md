@@ -71,6 +71,7 @@ trigger_keywords:
 - device
 - compliance
 - grader
+capabilities: [read, write]
 ---
 
 

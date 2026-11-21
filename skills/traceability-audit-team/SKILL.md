@@ -21,6 +21,7 @@ tags:
   - 证据链
 agent_created: true
 ambassador: arche
+capabilities: [read]
 ---
 
 # 溯源审计团（Traceability Audit Team）

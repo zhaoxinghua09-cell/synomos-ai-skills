@@ -19,6 +19,7 @@ description_zh: "支持多源导入、多模态问答、PPT生成的原生Agenti
 description_en: "An Agentic knowledge base with multi-source import, multi-modal Q&A, and PPT generation. It deeply parses text and multimedia, equipping Agents with high-quality, secure knowledge"
 visibility: "public"
 ambassador: didaskalos
+capabilities: [read, write, network]
 ---
 
 # 乐享知识库 MCP Skill

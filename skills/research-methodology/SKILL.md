@@ -19,6 +19,7 @@ description_en: "LaoPaidang research execution methodology (Plan→Do→Check→
 platforms: [windows, macos, linux]
 xiaping_category: 学术研究
 ambassador: didaskalos
+capabilities: [read]
 ---
 
 # research-methodology（调研方法论）v1.0

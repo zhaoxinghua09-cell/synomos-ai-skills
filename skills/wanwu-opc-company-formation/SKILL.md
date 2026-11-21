@@ -29,6 +29,7 @@ aliases:
   - OPC开办
 description_en: "This skill is a hands-on guide to founding and operating a One Person Company (OPC, including one-person LLC / one-person joint-stock company) as a natural person. Use when you want to register/start a company, get a business license, low-cost startup, choose entity type (sole proprietor vs OPC vs multi-person company), decide name/business-scope/registered-capital, register online (e.g. Beijing e-window one-stop portal), engrave seals/open bank account, tax registration & bookkeeping, small-scale taxpayer / SME tax burden, social security & housing fund, annual reporting, simple/normal deregistration, ICP/EDI licenses, capital reduction/increase & changes, OPC asset independence & reversed burden-of-proof self-protection, 2024 new Company Law practice."
 author: 潘布达（内容发布运营团）
+capabilities: [read]
 ---
 
 # 一人公司（OPC）办企业全流程

@@ -19,6 +19,7 @@ description_en: 'Single Source of Truth (SSOT) three-layer architecture (fact ba
 platforms: [windows, macos, linux]
 xiaping_category: 办公效率
 ambassador: didaskalos
+capabilities: [read]
 ---
 
 # 单一事实源与变更管理（SSOT Content Management）

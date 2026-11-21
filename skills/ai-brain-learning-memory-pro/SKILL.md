@@ -55,6 +55,7 @@ trigger_keywords:
 - learning
 - memory
 - pro
+capabilities: [read]
 ---
 
 

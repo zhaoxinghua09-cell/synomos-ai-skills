@@ -47,6 +47,7 @@ trigger_keywords:
 - publish
 - quality
 - gate
+capabilities: [read]
 ---
 
 

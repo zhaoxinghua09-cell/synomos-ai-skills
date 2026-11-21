@@ -42,6 +42,7 @@ trigger_keywords:
 - credential
 - vault
 - design
+capabilities: [read, write]
 ---
 
 
