@@ -8,16 +8,20 @@
     {
       "root_digest": "5be87af6dab5dc0f07f613649119db95a2e6145e55e85da6043751d8a83a4256",
       "sequence": 2
+    },
+    {
+      "root_digest": "0fcd93b2263b6c060a5755b1f3b84e5e6f79245ad96c5005e6eedd2dce13d16f",
+      "sequence": 3
     }
   ],
-  "root_digest": "5be87af6dab5dc0f07f613649119db95a2e6145e55e85da6043751d8a83a4256",
+  "root_digest": "0fcd93b2263b6c060a5755b1f3b84e5e6f79245ad96c5005e6eedd2dce13d16f",
   "schema_version": 2,
-  "sequence": 2,
+  "sequence": 3,
   "skill_count": 32,
   "skills": [
     {
       "declared_name": "synomosai-skills",
-      "digest": "9baf76daeeafd682707b24d48e1b501c02dd0584dc5091bcc9b28776c1ac91c3",
+      "digest": "be43afb0e07d9d08b59d4ee4a12205577d70fb19786b57c1e6b26d250d7fa543",
       "file_count": 392,
       "has_description": true,
       "path": "."
