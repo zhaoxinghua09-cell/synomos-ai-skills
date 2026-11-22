@@ -1,5 +1,5 @@
 # SynomosAI 技能库（GitHub 镜像）
-[![Trust Score](https://img.shields.io/badge/Trust%20Score-98%2F100%20A+-2ea44f.svg)](https://github.com/zhaoxinghua09-cell/skillgate)
+[![Trust Score](https://img.shields.io/badge/Trust%20Score%20(self-assessed)-98%2F100%20A+-2ea44f.svg)](https://github.com/zhaoxinghua09-cell/skillgate)
 ## 许可说明 · License Notice
 
 > **本仓库使用自定义许可，不是 MIT / Apache-2.0**。平台显示为 `Other`（NOASSERTION），
