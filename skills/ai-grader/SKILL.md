@@ -22,6 +22,7 @@ tags:
   - 智能体体检
   - llm-eval
 ambassador: krites
+capabilities: [read, write]
 ---
 
 # AI 体检师 (ai-grader)

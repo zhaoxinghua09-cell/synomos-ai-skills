@@ -72,6 +72,7 @@ trigger_keywords:
 - device
 - clinical
 - evaluation
+capabilities: [read]
 ---
 
 

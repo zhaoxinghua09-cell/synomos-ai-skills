@@ -52,6 +52,7 @@ trigger_keywords:
 - rag
 - eval
 - harness
+capabilities: [read, write, exec, network]
 ---
 
 

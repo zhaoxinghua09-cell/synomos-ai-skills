@@ -230,6 +230,7 @@ trigger_keywords:
 - medxpert
 - llm
 - library
+capabilities: [read, write, exec, network]
 ---
 
 

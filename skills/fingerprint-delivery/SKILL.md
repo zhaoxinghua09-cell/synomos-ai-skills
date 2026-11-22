@@ -24,6 +24,7 @@ title: 作品指纹交付
 description_en: "Add a tamper-evident timestamp + SHA-256 content snapshot fingerprint + final-file checksum + copyright trio to HTML/PDF/doc deliverables for traceable, verifiable handoff. Pure Python stdlib, no network."
 xiaping_category: 办公效率
 ambassador: arche
+capabilities: [read, write]
 ---
 
 # 指纹锁定交付 (fingerprint-delivery)

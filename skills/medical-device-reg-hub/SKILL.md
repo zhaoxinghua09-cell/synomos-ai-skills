@@ -414,6 +414,7 @@ trigger_keywords:
 - reg
 - hub
 - medxpert
+capabilities: [read]
 ---
 
 

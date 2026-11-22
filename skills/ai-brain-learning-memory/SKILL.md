@@ -53,6 +53,7 @@ trigger_keywords:
 - brain
 - learning
 - memory
+capabilities: [read, write]
 ---
 
 

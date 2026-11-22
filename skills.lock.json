@@ -1,0 +1,237 @@
+{
+  "algorithm": "sha256(sorted relpath + NUL + file sha256, per line)",
+  "history": [
+    {
+      "root_digest": "44f40989c68b32c1096bebcaeac10e922f3186637314d7ed2136055d76dff7c8",
+      "sequence": 1
+    },
+    {
+      "root_digest": "df0b5987560fd0517b9260f9f95c004f12c77cef28045f59346d0f34068e9054",
+      "sequence": 2
+    }
+  ],
+  "root_digest": "df0b5987560fd0517b9260f9f95c004f12c77cef28045f59346d0f34068e9054",
+  "schema_version": 2,
+  "sequence": 2,
+  "skill_count": 31,
+  "skills": [
+    {
+      "declared_name": "a3-law-operational",
+      "digest": "e14229c67bdf93a2e4d7b42ea17aa31fb1b4c39b546678605936643d7d114836",
+      "file_count": 5,
+      "has_description": true,
+      "path": "skills/a3-law-operational"
+    },
+    {
+      "declared_name": "ai-brain-learning-memory",
+      "digest": "51accd3f62c53889dfbb6b52e52117314d20d4349022ade0be2e2948d186204d",
+      "file_count": 7,
+      "has_description": true,
+      "path": "skills/ai-brain-learning-memory"
+    },
+    {
+      "declared_name": "ai-brain-learning-memory-pro",
+      "digest": "07ced439f2b59ce011e188ccbc129c48f16ae5316d80d0c572b4db7defbc67b2",
+      "file_count": 9,
+      "has_description": true,
+      "path": "skills/ai-brain-learning-memory-pro"
+    },
+    {
+      "declared_name": "ai-governance-audit-chain",
+      "digest": "9042cde1673f06f781795a4a06533e2dd832d1f14516adc7bac77ee4b873383d",
+      "file_count": 5,
+      "has_description": true,
+      "path": "skills/ai-governance-audit-chain"
+    },
+    {
+      "declared_name": "ai-grader",
+      "digest": "32f6e0cc68a4ede58147b84a3294f594bec792b6c37a547ef8d00feb917bec01",
+      "file_count": 27,
+      "has_description": true,
+      "path": "skills/ai-grader"
+    },
+    {
+      "declared_name": "content-publish-lifecycle",
+      "digest": "cdca1a302d478d485133b60d60ebf819f1388fef24814e5b9e55ba406de44eb6",
+      "file_count": 10,
+      "has_description": true,
+      "path": "skills/content-publish-lifecycle"
+    },
+    {
+      "declared_name": "find-skills",
+      "digest": "2e450a4e3214e1733dfc10b74d9b4081204926882ea8d98d6ddf1198398bad75",
+      "file_count": 5,
+      "has_description": true,
+      "path": "skills/find-skills"
+    },
+    {
+      "declared_name": "fingerprint-delivery",
+      "digest": "cdc3e3cf824041ed68543a4208d712730983c59e5ba3ce7e112cd8ded0f9ecd1",
+      "file_count": 6,
+      "has_description": true,
+      "path": "skills/fingerprint-delivery"
+    },
+    {
+      "declared_name": "lexiang-knowledge-base",
+      "digest": "66b51938951b4f3de5b29683ffa6582d65aa9314b504d433d5669e475dfc3474",
+      "file_count": 33,
+      "has_description": true,
+      "path": "skills/lexiang-knowledge-base"
+    },
+    {
+      "declared_name": "medical-device-clinical-evaluation",
+      "digest": "480a0777083486dbc82e609744c1c6a110ec481e7a53718a384f396a4efde839",
+      "file_count": 10,
+      "has_description": true,
+      "path": "skills/medical-device-clinical-evaluation"
+    },
+    {
+      "declared_name": "medical-device-compliance-grader",
+      "digest": "19a45cca638e85e8d5c3dfe88e783aba67cc2fa130e1c7686369116e93b594f9",
+      "file_count": 13,
+      "has_description": true,
+      "path": "skills/medical-device-compliance-grader"
+    },
+    {
+      "declared_name": "medical-device-intl-business",
+      "digest": "2eba0bc3d7db9fee2f760df37ecb3f7a05261ad12b71840152a6039d2a1ea40e",
+      "file_count": 11,
+      "has_description": true,
+      "path": "skills/medical-device-intl-business"
+    },
+    {
+      "declared_name": "medical-device-label-ifu",
+      "digest": "55cbbe6d59e4d052faed53d6beec2e7aef1a4a3009760607058c0ae41d97f709",
+      "file_count": 10,
+      "has_description": true,
+      "path": "skills/medical-device-label-ifu"
+    },
+    {
+      "declared_name": "medical-device-postmarket",
+      "digest": "2f47f3520c19584a1d522dc8a09dfb958765ca11cb694aa6f223374b673dcc29",
+      "file_count": 10,
+      "has_description": true,
+      "path": "skills/medical-device-postmarket"
+    },
+    {
+      "declared_name": "medxpert-reg-hub",
+      "digest": "bd3e0e05e781f289c49de2d7f4c524b88d5a8b3d2ea1e7d3c110bc707d6b51d0",
+      "file_count": 44,
+      "has_description": true,
+      "path": "skills/medical-device-reg-hub"
+    },
+    {
+      "declared_name": "medical-device-risk-management",
+      "digest": "b275f31da1d478d2dad8f960f2058258d281c352fa0f101722fb3663e266e461",
+      "file_count": 10,
+      "has_description": true,
+      "path": "skills/medical-device-risk-management"
+    },
+    {
+      "declared_name": "medical-device-samd",
+      "digest": "60a9596a974c48e81dc3ca59231eee4b0c4b49c632e5e56be149c738fecb3ab1",
+      "file_count": 10,
+      "has_description": true,
+      "path": "skills/medical-device-samd"
+    },
+    {
+      "declared_name": "medical-device-techfile-sted",
+      "digest": "c3cb6e143060aaf8a0141e78865cf9d76766e4b03cbb73f421973293929339fb",
+      "file_count": 10,
+      "has_description": true,
+      "path": "skills/medical-device-techfile-sted"
+    },
+    {
+      "declared_name": "medxpert-content-ops",
+      "digest": "de281fe385941d008f99e4d8cc358c37acd26828f5babc36af5910adfe1cfa9d",
+      "file_count": 5,
+      "has_description": true,
+      "path": "skills/medxpert-content-ops"
+    },
+    {
+      "declared_name": "medxpert-doc-toolchain",
+      "digest": "0f101527f528ea916470800c6be6cf0ffc3fb1968db28b9b1856260078cf5303",
+      "file_count": 5,
+      "has_description": true,
+      "path": "skills/medxpert-doc-toolchain"
+    },
+    {
+      "declared_name": "medxpert-llm-library",
+      "digest": "c025a37c121c01ecda1fe5e99e27662284f99ab0824790b86969582035ee88c9",
+      "file_count": 14,
+      "has_description": true,
+      "path": "skills/medxpert-llm-library"
+    },
+    {
+      "declared_name": "opc-company-formation",
+      "digest": "9bbdeecae66eee325d508f017172c6e2287bd01d695e3b0eab954dc20de8b119",
+      "file_count": 6,
+      "has_description": true,
+      "path": "skills/opc-company-formation"
+    },
+    {
+      "declared_name": "publish-quality-gate",
+      "digest": "f15bc1aed2cd87cbfcf7873630221734bb5d97949235b4fb26e5a20d9495cda7",
+      "file_count": 8,
+      "has_description": true,
+      "path": "skills/publish-quality-gate"
+    },
+    {
+      "declared_name": "rag-eval-harness",
+      "digest": "5ac203b94f7466fa38390e763c262241fdc0b4ab9560c1549c32b69c2ff050db",
+      "file_count": 11,
+      "has_description": true,
+      "path": "skills/rag-eval-harness"
+    },
+    {
+      "declared_name": "research-methodology",
+      "digest": "54991ecf39db69a7c9b20a5d788bcbf6ec4ba8ed569fb1bb375b705ce95469ff",
+      "file_count": 5,
+      "has_description": true,
+      "path": "skills/research-methodology"
+    },
+    {
+      "declared_name": "ssot-content-management",
+      "digest": "c8584cf0df2541ec96c0d69bab6fed952a2b1c2d0d8fd3e98819b8c89ff97caa",
+      "file_count": 5,
+      "has_description": true,
+      "path": "skills/ssot-content-management"
+    },
+    {
+      "declared_name": "traceability-audit-team",
+      "digest": "5e9c7a0836c14d91c39558a6edad5464549f7e9688521812edde51b8e9b4b945",
+      "file_count": 11,
+      "has_description": true,
+      "path": "skills/traceability-audit-team"
+    },
+    {
+      "declared_name": "credential-vault-design",
+      "digest": "5aa7dfc4679af2776e02bdc7e44011f54a9b26b22d73bafb3872e1dd5a192f96",
+      "file_count": 28,
+      "has_description": true,
+      "path": "skills/unified-credential-vault"
+    },
+    {
+      "declared_name": "medxpert-llm-library",
+      "digest": "91b445eb45ff87abf755c61daa8f0529101049d1183df04cd3d5120235a3030d",
+      "file_count": 13,
+      "has_description": true,
+      "path": "skills/wanwu-medxpert-llm-library"
+    },
+    {
+      "declared_name": "medical-device-reg-hub",
+      "digest": "eb888a6c46a43c3573f82ee65e538fff1beec1e7f6158c669d726cd8251146e3",
+      "file_count": 32,
+      "has_description": true,
+      "path": "skills/wanwu-medxpert-reg-hub"
+    },
+    {
+      "declared_name": "opc-company-formation",
+      "digest": "bc17d4baf662898e1c63f347c89c1dcea162df5210223adf0c9595312d417258",
+      "file_count": 3,
+      "has_description": true,
+      "path": "skills/wanwu-opc-company-formation"
+    }
+  ],
+  "validated_against": []
+}

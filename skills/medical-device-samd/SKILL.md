@@ -78,6 +78,7 @@ trigger_keywords:
 - medical
 - device
 - samd
+capabilities: [read]
 ---
 
 

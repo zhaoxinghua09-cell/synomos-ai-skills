@@ -70,6 +70,7 @@ trigger_keywords:
 - device
 - techfile
 - sted
+capabilities: [read]
 ---
 
 

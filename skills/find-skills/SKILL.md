@@ -20,6 +20,7 @@ xiaping_category: ["效率工具"]
 xiaping_tags: ["AI工具","技能发现","WorkBuddy"]
 xiaping_eval_strategy: developer
 ambassador: logos
+capabilities: [read]
 ---
 
 # find-skills（场景技能匹配器）

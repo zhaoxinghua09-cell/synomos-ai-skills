@@ -21,6 +21,7 @@ tags:
   - 方法论
   - 落地
 ambassador: krites
+capabilities: [read]
 ---
 
 # A³ 法则操作化 (a3-law-operational)

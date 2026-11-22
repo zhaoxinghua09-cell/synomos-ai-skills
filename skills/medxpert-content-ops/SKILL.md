@@ -54,6 +54,7 @@ trigger_keywords:
 - medxpert
 - content
 - ops
+capabilities: [read]
 ---
 
 

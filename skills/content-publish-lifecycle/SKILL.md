@@ -41,6 +41,7 @@ trigger_keywords:
 - content
 - publish
 - lifecycle
+capabilities: [read, write]
 ---
 
 
